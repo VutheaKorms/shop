@@ -1,0 +1,170 @@
+<div ng-controller="ProfileCtrl">
+
+    <div class="row">
+        <div class="col-lg-11">
+            <h1 class="page-header">Profile</h1>
+        </div>
+        <div class="col-lg-1">
+            <h1 class="page-header"><button type="button" class="btn btn-default" ng-click="goBack();">Back</button></h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!--<div class="row">-->
+        <!--<div class="col-lg-6">-->
+            <!--&lt;!&ndash;&lt;!&ndash;<button type="button" class="btn btn-primary" ng-click="create();">Add New Product Type</button>&ndash;&gt;&ndash;&gt;-->
+            <!--&lt;!&ndash;<button class="btn btn-success" data-toggle="modal" data-target="#create-brand">Create New</button>&ndash;&gt;-->
+        <!--</div>-->
+        <!--<div class="col-lg-6">-->
+            <!--<div class="col-lg-3">-->
+                <!--&lt;!&ndash;<div class="col-lg-2 pull-right">&ndash;&gt;-->
+                <!--&lt;!&ndash;<div class="btn-group">&ndash;&gt;-->
+                <!--&lt;!&ndash;<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&ndash;&gt;-->
+                <!--&lt;!&ndash;Filter by <span class="caret"></span>&ndash;&gt;-->
+                <!--&lt;!&ndash;</button>&ndash;&gt;-->
+                <!--&lt;!&ndash;<ul class="dropdown-menu">&ndash;&gt;-->
+                <!--&lt;!&ndash;<li><a ui-sref=""><i class="fa fa-eye"></i> All</a></li>&ndash;&gt;-->
+                <!--&lt;!&ndash;<li><a href="#"><i class="fa-check-square-o"></i> Active</a></li>&ndash;&gt;-->
+                <!--&lt;!&ndash;<li><a href="#"><i class="fa fa-ban"></i> Disable</a></li>&ndash;&gt;-->
+                <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--</div>-->
+            <!--<div class="col-lg-9">-->
+                <!--<div class="box-tools pull-right" style="display:inline-table">-->
+                    <!--<div class="input-group form-group pull-right">-->
+                        <!--<input type="text" class="form-control  ng-valid ng-dirty"-->
+                               <!--placeholder="Search" ng-change="searchDB()"-->
+                               <!--ng-model="searchText" name="table_search" title=""-->
+                               <!--tooltip="" data-original-title="Min character length is 3">-->
+                        <!--<span class="input-group-addon">Search</span>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--&lt;!&ndash;<div class="form-group">&ndash;&gt;-->
+                <!--&lt;!&ndash;<input class="form-control" placeholder="Search....">&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--</div>-->
+
+        <!--</div>-->
+    <!--</div>-->
+    <div class="row">
+        <div class="col-lg-12">
+
+                    <div class="dataTable_wrapper">
+                        <table>
+                            <span><b>Name :</b></span>&nbsp;&nbsp;<span ng-bind="data.name"></span><br /><br />
+                            <span><b>Email :</b></span>&nbsp;&nbsp;<span ng-bind="data.email"></span><br /><br />
+                            <span><b>Date :</b></span>&nbsp;&nbsp;<span ng-bind="data.updated_at"></span><br /><br />
+                            <span><b>Status :</b></span>&nbsp;&nbsp;
+                            <div>
+                                    <p ng-if="data.status == 1"><span class="label label-info">Active</span></p>
+                                    <p ng-if="data.status == 0"><span class="label label-default">Disable</span></p>
+                            </div>
+                            <br /><br />
+                            <button data-toggle="modal" ng-click="edit(data.id)" data-target="#edit-data"><i class="fa fa-pencil"></i> Update</button>&nbsp;
+                            <button ng-if="data.status == 1" data-toggle="modal" ng-click="edit(data.id)" data-target="#disable-data"><i class="fa fa-ban"></i> Disable</button>
+                            <button ng-if="data.status == 0" data-toggle="modal" ng-click="edit(data.id)" data-target="#enable-data"><i class="fa fa-user"></i> Enable</button>
+                        </table>
+                    </div>
+                    <!-- /.table-responsive -->
+
+                </div>
+                <!-- /.panel-body -->
+
+        <!-- /.col-lg-12 -->
+    </div>
+
+    <div class="modal fade" id="edit-data" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form method="POST" name="editItem" role="form" ng-submit="saveEdit()">
+                    <input ng-model="form.id" type="hidden" placeholder="Name" name="name" class="form-control" />
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Edit Profile</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                    <strong>Name : </strong>
+                                    <div class="form-group">
+                                        <input ng-model="form.name" type="text" placeholder="Name" name="title" class="form-control" required />
+                                    </div>
+                                    <strong>Email : </strong>
+                                    <div class="form-group">
+                                        <input ng-model="form.email" type="email" placeholder="Email" name="title" class="form-control" required />
+                                    </div>
+                                    <strong>Password : </strong>
+                                    <div class="form-group">
+                                        <input type="{{inputType}}" ng-model="form.password" type="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                                               title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" class="form-control" required>
+                                        <input type="checkbox" id="checkbox" ng-model="passwordCheckbox" ng-click="hideShowPassword()" />
+                                        <label for="checkbox" ng-if="passwordCheckbox">Hide password</label>
+                                        <label for="checkbox" ng-if="!passwordCheckbox">Show password</label><br /><br />
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-6">
+
+                                </div>
+                            </div>
+                            <br />
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" ng-disabled="editItem.$invalid" class="btn btn-primary create-crud">Save Change</button>
+                        </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="disable-data" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form method="POST" name="disableItem" role="form" ng-submit="saveDisable()">
+                    <input ng-model="form.id" type="hidden" placeholder="Name" name="name" class="form-control" />
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        <h4 class="modal-title">Disable Profile</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <h3>Disable</h3>
+                            <p>Are you want to disable this <b>{{form.name}}</b> account??</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-warning create-crud">Yes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="enable-data" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form method="POST" name="enableItem" role="form" ng-submit="saveEnable()">
+                    <input ng-model="form.id" type="hidden" placeholder="Name" name="name" class="form-control" />
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        <h4 class="modal-title">Enable Profile</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <h3>Enable</h3>
+                            <p>Are you want to enable this <b>{{form.name}}</b> account??</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-warning create-crud">Yes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</div>
