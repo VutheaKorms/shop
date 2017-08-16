@@ -17,6 +17,11 @@ class Country extends Model
         'status',
     ];
 
+    public function state()
+    {
+        return $this->hasMany('App\Models\State','country_id','id');
+    }
+
     public function addresses()
     {
         return $this->hasMany('App\Models\Address','country_id','id');

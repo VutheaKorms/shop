@@ -8,10 +8,21 @@ angular.module('app')
       replace: true,
       scope: {
       },
-      controller:function($scope){
+      controller:function($scope, $http){
         $scope.selectedMenu = 'dashboard';
         $scope.collapseVar = 0;
-        
+
+        function loadAuth() {
+            $http.get('api/test')
+              .then(function(response) {
+                $scope.userAuth = response.data;
+            });
+        }
+
+        loadAuth();
+
+        $scope.email = "admin@gmail.com";
+
         $scope.check = function(x){
           
           if(x==$scope.collapseVar)

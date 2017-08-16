@@ -79,7 +79,7 @@ class ProductsController extends Controller
 
     public function edit($id)
     {
-        $item = Product::find($id);
+        $item = Product::with('categories','brands','contacts')->find($id);
         return response($item);
     }
 

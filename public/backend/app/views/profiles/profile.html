@@ -60,9 +60,9 @@
                                     <p ng-if="data.status == 0"><span class="label label-default">Disable</span></p>
                             </div>
                             <br /><br />
-                            <button data-toggle="modal" ng-click="edit(data.id)" data-target="#edit-data"><i class="fa fa-pencil"></i> Update</button>&nbsp;
-                            <button ng-if="data.status == 1" data-toggle="modal" ng-click="edit(data.id)" data-target="#disable-data"><i class="fa fa-ban"></i> Disable</button>
-                            <button ng-if="data.status == 0" data-toggle="modal" ng-click="edit(data.id)" data-target="#enable-data"><i class="fa fa-user"></i> Enable</button>
+                            <button class="btn btn-primary" data-toggle="modal" ng-click="edit(data.id)" data-target="#edit-data"><i class="fa fa-pencil"></i> Edit</button>&nbsp;
+                            <button class="btn btn-warning" ng-if="data.status == 1" data-toggle="modal" ng-click="edit(data.id)" data-target="#disable-data"><i class="fa fa-ban"></i> Disable</button>
+                            <button class="btn btn-primary" ng-if="data.status == 0" data-toggle="modal" ng-click="edit(data.id)" data-target="#enable-data"><i class="fa fa-user"></i> Enable</button>
                         </table>
                     </div>
                     <!-- /.table-responsive -->

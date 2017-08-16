@@ -21,11 +21,17 @@ class Product extends Model
         'brand_id',
         'status',
         'user_id',
+        'contact_id',
     ];
 
     public function brands()
     {
         return $this->belongsTo('App\Models\Brand','brand_id');
+    }
+
+    public function contacts()
+    {
+        return $this->belongsTo('App\Models\Contact','contact_id');
     }
 
     /**

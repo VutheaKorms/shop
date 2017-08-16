@@ -53,19 +53,6 @@ angular.module('app')
     .controller('ProductEditCtrl', function(dataFactory,$scope, $state, Notification, $stateParams) {
 
         $scope.id = $stateParams.id;
-
-        function loadProductById() {
-            dataFactory.httpRequest('api/products/' + $scope.id + '/edit').then(function(data) {
-                $scope.form = data;
-                $scope.selectedCategory = data.category_id;
-                $scope.selectedBrand = data.brand_id;
-            });
-        }
-
-        loadProductById();
-
-
-        $scope.selectedCategory = null;
         $scope.productCategory = [];
 
         $scope.selectedColor = "Black";
@@ -73,20 +60,38 @@ angular.module('app')
         $scope.selectedType = "New";
         $scope.types = [];
         $scope.editor = '';
-        $scope.selectedBrand = null;
         $scope.brands = [];
-
+        $scope.selectedBrand = {};
+        $scope.selectedCategory = {};
+        $scope.selectedContact = null;
 
         function goToUpload() {
             $state.go('dashboard.product-edit-upload', {"id" : $scope.id});
-            //$state.go('dashboard.product-upload' + $scope.id);
         }
 
+        function loadProductById() {
+            dataFactory.httpRequest('api/products/' + $scope.id + '/edit').then(function(data) {
+                $scope.form = data;
+                $scope.selectedBrand.selected = {
+                    id: data.brand_id,
+                    name: data.brands.name,
+                }
+                $scope.selectedCategory.selected = {
+                    id: data.category_id,
+                    name: data.categories.name,
+                }
+
+            });
+        }
+
+        loadProductById();
+
         $scope.saveEdit = function(){
-            $scope.form.brand_id = $scope.selectedBrand;
-            $scope.form.category_id= $scope.selectedCategory;
+            $scope.form.brand_id = $scope.selectedBrand.selected.id;
+            $scope.form.category_id= $scope.selectedCategory.selected.id;
             $scope.form.type= $scope.selectedType;
             $scope.form.product_color = $scope.selectedColor;
+            $scope.form.contact_id = $scope.selectedContact.id;
             dataFactory.httpRequest('api/products/'+$scope.form.id,'PUT',{},$scope.form).then(function(data) {
                 $scope.data = apiModifyTable($scope.data,data.id,data);
                 Notification.success('Successfully saved');
@@ -96,26 +101,31 @@ angular.module('app')
         }
 
         function loadCategory(status) {
-            dataFactory.httpRequest('api/test').then(function(data) {
-                $scope.users = data;
-                dataFactory.httpRequest('api/categories/status/' + status +'/acc/' + $scope.users.id).then(function(data) {
-                    $scope.productCategory = data;
-                });
+            dataFactory.httpRequest('api/categories/status/' + status).then(function(data) {
+                $scope.productCategory = data;
             });
         }
 
         loadCategory(1);
 
         function loadBrand(status) {
-            dataFactory.httpRequest('api/test').then(function(data) {
-                $scope.users = data;
-                dataFactory.httpRequest('api/brands/status/' + status +'/acc/' + $scope.users.id).then(function(data) {
-                    $scope.brands = data;
-                });
+            dataFactory.httpRequest('api/brands/status/' + status).then(function(data) {
+                $scope.brands = data;
             });
         }
 
         loadBrand(1);
+
+        function loadContacts(status) {
+            dataFactory.httpRequest('api/test').then(function(data) {
+                $scope.users = data;
+                dataFactory.httpRequest('api/contacts/status/' + status + '/acc/' + $scope.users.id).then(function (data) {
+                    $scope.contacts = data;
+                });
+            });
+        }
+
+        loadContacts(1);
 
         $scope.skip = function() {
             $state.go('dashboard.product-product');

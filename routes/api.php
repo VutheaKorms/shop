@@ -72,6 +72,7 @@ Route::get('cover/{id}','UploadController@editPhoto');
 Route::get('productByCate/{cateId}','CategoriesController@getProductByCate');
 Route::get('productByCategory/{id}','ItemController@getProByCategory');
 
+Route::put('contacts/disable/{id}','ContactsController@disable');
 Route::post('contacts','ContactsController@store');
 Route::delete('contacts/{id}','ContactsController@destroy');
 Route::put('contacts/update/{id}','ContactsController@update');
@@ -82,6 +83,7 @@ Route::get('contacts/status/{status}/acc/{acc}','ContactsController@getAllActive
 Route::get('countries/status/{status}','AddressesController@getAllCountryActive');
 Route::get('states/status/{status}','AddressesController@getAllStateActive');
 Route::get('locations/status/{status}','AddressesController@getAllLocationActive');
+Route::get('states/status/{status}/country/{country}','AddressesController@getStateByCountry');
 
 
 

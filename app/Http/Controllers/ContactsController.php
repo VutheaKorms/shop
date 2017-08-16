@@ -91,6 +91,7 @@ class ContactsController extends Controller
             ->select('contacts.email_address as email_address',
                 'contacts.name as name',
                 'contacts.id as id',
+                'addresses.id as address_id',
                 'contacts.status as status',
                 'contacts.created_at as created_at',
                 'contacts.number1 as number1',
@@ -98,7 +99,9 @@ class ContactsController extends Controller
                 'countries.id as country_id',
                 'countries.name as country_name',
                 'locations.id as location_id',
+                'locations.name as location_name',
                 'states.id as state_id',
+                'states.name as state_name',
                 'addresses.address2 as address2')
             ->join('addresses','addresses.id', '=' ,'contacts.address_id')
             ->join('countries','countries.id', '=' ,'addresses.country_id')
@@ -143,7 +146,8 @@ class ContactsController extends Controller
 
     public function destroy($id)
     {
-        return Contact::where('id',$id)->delete();
+        $contact = DB::delete('delete from contacts where id = ?',[$id]);
+        return response($contact);
     }
 
     public function update(Request $request, $id)
@@ -162,7 +166,7 @@ class ContactsController extends Controller
 
         $address->save();
 
-        $contact= Contact::findOrFail($id);
+        $contact = Contact::findOrFail($id);
         $contact->name = $request['name'];
         $contact->number1 = $request['number1'];
         $contact->number2 = $request['number2'];
@@ -170,12 +174,26 @@ class ContactsController extends Controller
         $contact->email_address = $request['email_address'];
         $contact->fax_number = $request['fax_number'];
         $contact->user_id = "$user->user_id";
-        $contact->address_id = "$address->id";
+        $contact->address_id = $address->id;
 
         $contact->save();
 
         return response($contact);
 
+    }
+
+    public  function disable(Request $request, $id)
+    {
+        try {
+            $contact = Contact::findOrFail($id);
+            $contact->status = $request[0];
+            $contact->updated_at = $request['$updated_at'];
+            $contact->save();
+            return response($contact);
+        }
+        catch(ModelNotFoundException $err){
+            //Show error page
+        }
     }
 
 

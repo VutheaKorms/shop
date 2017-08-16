@@ -7,10 +7,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'LLC') }}</title>
+    {{--<title>{{ config('app.name', 'LLC') }}</title>--}}
+    <title>168myshop.com</title>
 
     <!-- Styles -->
     {{--<link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
@@ -19,6 +23,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="shortcut icon" href="frontend/themes/images/ico/favicon.ico">
 
     <link rel="stylesheet" href="bower_components/angular/simditor.css" />
     <!-- build:css(.tmp) styles/main.css -->
@@ -134,7 +139,11 @@
                 <ul class="dropdown-menu dropdown-user">
                     <li><a class="nav-link" ui-sref="dashboard.profile"><i class="fa fa-user fa-fw"></i> User Profiles</a>
                     </li>
-                    <li><a class="nav-link" ui-sref="dashboard.cover"><i class="fa fa-gear fa-fw"></i> Change Slide</a>
+                    <li>
+                    @if ( Auth::user()->email === "admin@gmail.com")
+                        <a class="nav-link" ui-sref="dashboard.cover"><i class="fa fa-gear fa-fw"></i> Change Slide</a>
+                    @else
+                    @endif
                     </li>
                     <li><a class="nav-link" ui-sref="dashboard.setting"><i class="fa fa-gear fa-fw"></i> Settings</a>
                     </li>

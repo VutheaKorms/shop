@@ -29,6 +29,15 @@ class AddressesController extends Controller
         return response($brands);
     }
 
+    public function getStateByCountry($status, $country_id) {
+        $state = State::with('country')->where('status', $status)
+            ->where('country_id', $country_id)
+            ->orderBy('name', 'desc')
+            ->take(10)
+            ->get();
+        return response($state);
+    }
+
     public function getAllStateActive($status) {
         $brands = State::where('status', $status)
             ->orderBy('name', 'desc')

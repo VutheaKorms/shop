@@ -62,6 +62,9 @@ angular.module('app')
         $scope.selectedLocation = null;
         $scope.selectedState = null;
         $scope.selectedCountry = null;
+        $scope.countrySelected = {};
+        $scope.stateSelected = {};
+        $scope.locationSelected = {};
 
         $scope.pageChanged = function(newPage) {
             getResultsPage(newPage);
@@ -134,9 +137,9 @@ angular.module('app')
 
         $scope.saveEdit = function(){
             $scope.loading = true;
-            $scope.form.country_id = $scope.selectedCountry.id;
-            $scope.form.state_id = $scope.selectedState.id;
-            $scope.form.location_id = $scope.selectedLocation.id;
+            $scope.form.country_id = $scope.countrySelected.selected.id;
+            $scope.form.state_id = $scope.stateSelected.selected.id;
+            $scope.form.location_id = $scope.locationSelected.selected.id;
             dataFactory.httpRequest('api/contacts/update/'+$scope.form.id,'PUT',{},$scope.form).then(function(data) {
                 $(".modal").modal("hide");
                 $scope.data = apiModifyTable($scope.data,data.id,data);
@@ -160,17 +163,20 @@ angular.module('app')
                 $scope.users = data;
                 dataFactory.httpRequest('api/contacts/id/' + id + '/account/' + $scope.users.id + '/edit').then(function(data) {
                     $scope.form = data[0];
-                    //$scope.selectedCountry.id = data[0].country_id;
-                    //console.log($scope.form);
-                    //$scope.Obj = {
-                    //    "id": data[0].id,
-                    //    "name": data[0].name,
-                    //};
-                    //
-                    //
-                    //
-                    //console.log($scope.Obj);
+                    $scope.countrySelected.selected = {
+                        id: data[0].country_id,
+                        name: data[0].country_name,
+                    }
 
+                    $scope.stateSelected.selected = {
+                        id: data[0].state_id,
+                        name: data[0].state_name,
+                    }
+
+                    $scope.locationSelected.selected = {
+                        id: data[0].location_id,
+                        name: data[0].location_name,
+                    }
 
                 });
             });
@@ -185,6 +191,16 @@ angular.module('app')
             });
         }
 
+        $scope.saveDisable = function(){
+            $scope.loading = true;
+            dataFactory.httpRequest('api/contacts/disable/'+$scope.form.id,'PUT',{},$scope.form).then(function(data) {
+                $(".modal").modal("hide");
+                $scope.data = apiModifyTable($scope.data,data.id,data);
+                Notification.success('Successfully saved');
+                $scope.loading = false;
+                getResultsPage(1);
+            });
+        }
 
         $scope.goBack = function() {
             window.history.back();
@@ -214,6 +230,7 @@ angular.module('app')
                 $scope.states = data;
             });
         }
+
 
         loadState(1);
 
