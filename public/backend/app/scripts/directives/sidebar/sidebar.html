@@ -2,39 +2,39 @@
 <div class="navbar-default sidebar" role="navigation">
     <div class="sidebar-nav navbar-collapse">
         <ul class="nav in" id="side-menu">
-            <!--<sidebar-search></sidebar-search>-->
+            <sidebar-search></sidebar-search>
 
             <li ui-sref-active="active">
-                <a ui-sref="dashboard.home"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                <a ui-sref="dashboard.home"><i class="fa fa-dashboard fa-fw"></i><span translate="Dashboard"></span></a>
             </li>
             <li ui-sref-active="active">
-                <a ui-sref="dashboard.brand"><i class="fa fa-bold"></i> Brands</a>
+                <a ui-sref="dashboard.brand"><i class="fa fa-bold"></i> <span translate="Brand"></span></a>
             </li>
             <li ui-sref-active="active">
-                <a ui-sref="dashboard.productCategory"><i class="fa fa-list-alt"></i> Categories</a>
+                <a ui-sref="dashboard.productCategory"><i class="fa fa-list-alt"></i> <span translate="Category"></span></a>
             </li>
             <li ui-sref-active="active">
-                <a ui-sref="dashboard.product"><i class="fa fa-shopping-cart"></i> Items</a>
+                <a ui-sref="dashboard.product"><i class="fa fa-shopping-cart"></i> <span translate="Item"></span></a>
             </li>
 
             <li>
                 <a href="" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                    <i class="fa fa-wrench fa-fw"></i> Settings<span
+                    <i class="fa fa-wrench fa-fw"></i> <span translate="Setting"></span><span
                         class="fa arrow"></span>
                 </a>
                 <div class="collapse" id="collapseExample">
                     <ul class="nav nav-second-level">
                         <li>
-                            <a ui-sref="dashboard.setting"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                            <a ui-sref="dashboard.setting"><i class="fa fa-gear fa-fw"></i> <span translate="Setting"></span></a>
                         </li>
                         <li>
-                            <a ui-sref="dashboard.profile"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                            <a ui-sref="dashboard.profile"><i class="fa fa-user fa-fw"></i> <span translate="Profile"></span></a>
                         </li>
                         <li ng-if="userAuth.email == email">
-                            <a ui-sref="dashboard.cover"><i class="fa fa-gear fa-fw"></i> Change Slide</a>
+                            <a ui-sref="dashboard.cover"><i class="fa fa-gear fa-fw"></i> <span translate="Slide"></span></a>
                         </li>
                         <li>
-                            <a ui-sref="dashboard.language"><i class="fa fa-gear fa-fw"></i> Language</a>
+                            <a ui-sref="dashboard.language"><i class="fa fa-gear fa-fw"></i> <span translate="Language"></span></a>
                         </li>
                     </ul>
                 </div>

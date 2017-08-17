@@ -9,8 +9,11 @@ angular.module('app')
       replace: true,
       scope: {
       },
-      controller:function($scope){
-        $scope.selectedMenu = 'home';
+      controller:function($scope, $translate){
+        //$scope.selectedMenu = 'home';
+          $scope.changeLanguage = function (key) {
+              $translate.use(key);
+          };
       }
     }
   });
