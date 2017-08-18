@@ -41,6 +41,7 @@
 
     <script src="bower_components/angular-encode-uri/dist/angular-encode-uri.min.js"></script>
     <script src="bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
+    <script src="bower_components/angular-translate/angular-translate.min.js"></script>
 
 </head>
 <body ng-app="app" ng-controller="IdController">
@@ -49,6 +50,16 @@
 
 <div id="header">
     <div class="container">
+        <div id="welcomeLine" class="row">
+            <div class="span6"><span translate="Welcome"></span><strong></strong></div>
+            <div class="span6">
+                <div class="pull-right">
+                    <span class="btn btn-mini" ng-click="changeLanguage('en')" translate="BUTTON_LANG_EN" class="ng-scope"></span>
+                    <span class="btn btn-mini" ng-click="changeLanguage('de')" translate="BUTTON_LANG_DE" class="ng-scope"></span>
+                </div>
+            </div>
+        </div>
+
         <!-- Navbar ================================================== -->
         <div id="logoArea" class="navbar">
             <a id="smallScreen" data-target="#topMenu" data-toggle="collapse" class="btn btn-navbar">
@@ -62,16 +73,16 @@
                 <form class="form-inline navbar-search" method="post" >
                     <input class="srchTxt" ng-model="searchText" type="text" placeholder="search..."/>
                     <select ng-model="selectedBrands" ng-options="item.id as item.name for item in brands">
-                        <option value="">Selected</option>
+                        <option value="" translate="Select"></option>
                     </select>
-                    <button type="button" id="submitButton" class="btn btn-primary" ng-click="filterByBrandID(selectedBrands)">Go</button>
+                    <button type="button" id="submitButton" class="btn btn-primary" ng-click="filterByBrandID(selectedBrands)"><span translate="Go"></span></button>
                 </form>
                 <ul id="topMenu" class="nav pull-right">
-                    {{--<li class=""><a href="special_offer.html">Specials Offer</a></li>--}}
-                    <li class=""><a href="about.html">About</a></li>
-                    <li class=""><a href="contact.html">Contact</a></li>
+                   {{--<li class=""><a href="special_offer.html">Specials Offer</a></li>--}}
+                    <li class=""><a href="about.html"><span translate="About_Menu"></span></a></li>
+                    <li class=""><a href="contact.html"><span translate="Contact_Menu"></span></a></li>
                     <li class="">
-                        <a href="/admin" role="button"  style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
+                        <a href="/admin" role="button"  style="padding-right:0"><span class="btn btn-large btn-success"><span translate="Post_Item"></span></span></a>
                     </li>
                 </ul>
             </div>
@@ -105,7 +116,7 @@
             <div id="sidebar" class="span3">
                 {{--<div class="well well-small"><a id="myCart" href="product_summary.html"><img src="frontend/themes/images/ico-cart.png" alt="cart">3 Items in your cart  <span class="badge badge-warning pull-right">$155.00</span></a></div>--}}
                 <div class="well well-small">
-                    <small>BRAND TYPE</small>
+                    <small translate="Brand_Type"></small>
                 </div>
                 <accordion>
                     <accordion-group heading="[[group.name]]" ng-click="getId(group.id)" ng-repeat="group in brands">
@@ -119,14 +130,14 @@
                 <div class="thumbnail">
                     <img src="frontend/themes/images/payment_methods.png" title="Bootshop Payment Methods" alt="Payments Methods">
                     <div class="caption">
-                        <h5>Payment Methods</h5>
+                        <h5 translate="Payment_Method"></h5>
                     </div>
                 </div>
             </div>
             <!-- Sidebar end=============================================== -->
             <div class="span9">
                 <div class="well well-small">
-                    <small>PRODUCTS</small>
+                    <small translate="Item"></small>
                     {{--<h4>Featured Products <small class="pull-right">200+ featured products</small></h4>--}}
                     {{--<div class="row-fluid">--}}
                         {{--<div id="featured" class="carousel slide">--}}
@@ -156,11 +167,11 @@
                 <br class="clr"/>
                 <form class="form-horizontal span6">
                     <div class="control-group">
-                        <label class="control-label alignL">Sort By </label>
+                        <label class="control-label alignL"><span translate="Sort_By"></span></label>
                         <select ng-model="sortExpression">
-                            <option value="" selected="selected">Product name A - Z</option>
-                            <option value="price">Price $0 - Unlimited</option>
-                            <option value="category_id">Category name A - Z</option>
+                            <option value="" selected="selected" translate="Item_Name_A_Z"></option>
+                            <option value="price" translate="Item_Price_Low_Up"></option>
+                            <option value="category_id" translate="Item_Cate_Name_A_Z"></option>
                         </select>
                     </div>
                 </form>
@@ -178,14 +189,21 @@
                                 <img src="../../../../../[[value.photo_name]]" height="142" width="142">
                             </div>
                             <div class="span4">
-                                <h3>[[value.product_type]] | <span ng-if="value.status == 1">Available</span><span ng-if="value.status == 0">Not Available</span> </h3>
-                                <hr class="soft"/>
+                                <h4>
+                                    <span style="color: orange" ng-if="value.product_type == 'New'" translate="Item_New"></span>
+                                    <span style="color: grey" ng-if="value.product_type == 'Used'" translate="Item_Used"></span>
+                                     |
+                                    <span ng-if="value.status == 1" translate="Available"></span>
+                                    <span ng-if="value.status == 0" translate="Not_Available"></span>
+                                </h4>
+
                                 <h5>[[ value.product_name ]] | [[value.category_name]] </h5>
                                 <p>
                                    [[value.description]]
                                 </p>
-                                <a class="btn btn-small pull-right" href="/product_detail.html/[[ value.product_id]][[ 'bar&baz'  | encodeURIComponent ]]">View Details</a>
+                                <a class="btn btn-small pull-right" href="/product_detail.html/[[ value.product_id]][[ 'bar&baz'  | encodeURIComponent ]]"><span translate="Button_View_Detail"></span></a>
                                 <br class="clr"/>
+                                <hr />
                             </div>
 
                             <div class="span3 alignR">
@@ -247,33 +265,33 @@
         <div class="row">
             <div class="span3">
                 <h5>ACCOUNT</h5>
-                <a href="login.html">YOUR ACCOUNT</a>
-                <a href="login.html">PERSONAL INFORMATION</a>
-                <a href="login.html">ADDRESSES</a>
-                <a href="login.html">DISCOUNT</a>
-                <a href="login.html">ORDER HISTORY</a>
+                <a href="">YOUR ACCOUNT</a>
+                <a href="">PERSONAL INFORMATION</a>
+                <a href="">ADDRESSES</a>
+                <a href="">DISCOUNT</a>
+                <a href="">ORDER HISTORY</a>
             </div>
             <div class="span3">
                 <h5>INFORMATION</h5>
-                <a href="contact.html">CONTACT</a>
-                <a href="register.html">REGISTRATION</a>
-                <a href="legal_notice.html">LEGAL NOTICE</a>
-                <a href="tac.html">TERMS AND CONDITIONS</a>
-                <a href="faq.html">FAQ</a>
+                <a href="">CONTACT</a>
+                <a href="">REGISTRATION</a>
+                <a href="">LEGAL NOTICE</a>
+                <a href="">TERMS AND CONDITIONS</a>
+                <a href="">FAQ</a>
             </div>
             <div class="span3">
                 <h5>OUR OFFERS</h5>
-                <a href="#">NEW PRODUCTS</a>
-                <a href="#">TOP SELLERS</a>
-                <a href="special_offer.html">SPECIAL OFFERS</a>
-                <a href="#">MANUFACTURERS</a>
-                <a href="#">SUPPLIERS</a>
+                <a href="">NEW PRODUCTS</a>
+                <a href="">TOP SELLERS</a>
+                <a href="">SPECIAL OFFERS</a>
+                <a href="">MANUFACTURERS</a>
+                <a href="">SUPPLIERS</a>
             </div>
             <div id="socialMedia" class="span3 pull-right">
-                <h5>SOCIAL MEDIA </h5>
-                <a href="#"><img width="60" height="60" src="frontend/themes/images/facebook.png" title="facebook" alt="facebook"/></a>
-                <a href="#"><img width="60" height="60" src="frontend/themes/images/twitter.png" title="twitter" alt="twitter"/></a>
-                <a href="#"><img width="60" height="60" src="frontend/themes/images/youtube.png" title="youtube" alt="youtube"/></a>
+                <h5 translate="SOCIAL_MEDIA"></h5>
+                <a href=""><img width="60" height="60" src="frontend/themes/images/facebook.png" title="facebook" alt="facebook"/></a>
+                <a href=""><img width="60" height="60" src="frontend/themes/images/twitter.png" title="twitter" alt="twitter"/></a>
+                <a href=""><img width="60" height="60" src="frontend/themes/images/youtube.png" title="youtube" alt="youtube"/></a>
             </div>
         </div>
         <p class="pull-right">&copy; 168myshop.com</p>

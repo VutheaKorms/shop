@@ -122,57 +122,57 @@
                 <form method="POST" name="addItem" role="form" ng-submit="saveAdd()">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                        <h4 class="modal-title">Create Contact</h4>
+                        <h4 class="modal-title" translate="Setup_Contact"></h4>
                     </div>
                     <div class="modal-body">
                         <div class="container">
                             <div class="row">
                                 <div class="col-xs-12 col-sm-6 col-md-6">
-                                    <strong>Name : </strong>
+                                    <strong translate="Name"> : </strong>
                                     <div class="form-group">
                                         <input ng-model="form.name" type="text" placeholder="Name" name="title" class="form-control" required />
                                     </div>
-                                    <strong>Email : </strong>
+                                    <strong translate="Email"> : </strong>
                                     <div class="form-group">
                                         <input ng-model="form.email_address" type="email" placeholder="Email" name="title" class="form-control" required />
                                     </div>
-                                    <strong>Phone : </strong>
+                                    <strong translate="Phone"> : </strong>
                                     <div class="form-group">
                                         <input ng-model="form.number1" type="text" placeholder="Phone" name="title" class="form-control" required />
                                     </div>
-                                    <strong>Address1 : </strong>
+                                    <strong translate="Address1"> : </strong>
                                     <div class="form-group">
                                         <input ng-model="form.address1" type="text" placeholder="Address1" name="title" class="form-control" />
                                     </div>
-                                    <strong>Address2 : </strong>
+                                    <strong translate="Address2"> : </strong>
                                     <div class="form-group">
                                         <input ng-model="form.address2" type="text" placeholder="Address2" name="title" class="form-control" />
                                     </div>
-                                    <strong>Country : </strong>
+                                    <strong translate="Country"> : </strong>
                                     <div class="form-group" >
                                         <select ng-model="selectedCountry" class="form-control" required
                                                 ng-options="item.name for item in countries">
-                                            <option value="">Select</option>
+                                            <option value="" translate="Select"></option>
                                         </select>
                                     </div>
-                                    <strong>State : </strong>
+                                    <strong translate="State"> : </strong>
                                     <div class="form-group" >
                                         <select ng-model="selectedState" class="form-control" required
                                                 ng-options="item.name for item in states | filter: {country_id: selectedCountry.id}">
-                                            <option value="">Select</option>
+                                            <option value="" translate="Select"></option>
                                         </select>
                                     </div>
-                                    <strong>Location : </strong>
+                                    <strong translate="Location"> : </strong>
                                     <div class="form-group" >
                                         <select ng-model="selectedLocation" class="form-control" required
                                                 ng-options="item.name for item in locations | filter: {state_id: selectedState.id}">
-                                            <option value="">Select</option>
+                                            <option value="" translate="Select"></option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="submit" ng-disabled="addItem.$invalid" class="btn btn-primary">Save</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><span translate="BUTTON_CLOSE"></span></button>
+                            <button type="submit" ng-disabled="addItem.$invalid" class="btn btn-primary"><span translate="BUTTON_SAVE"></span></button>
                         </div>
                     </div>
                 </form>
@@ -186,57 +186,57 @@
                 <form method="POST" name="editItem" role="form" ng-submit="saveEdit()">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                        <h4 class="modal-title">Create Contact</h4>
+                        <h4 class="modal-title" translate="Edit_Contact"></h4>
                     </div>
                     <div class="modal-body">
                         <div class="container">
                             <div class="row">
                                 <div class="col-xs-12 col-sm-6 col-md-6">
-                                    <strong>Name : </strong>
+                                    <strong translate="Name"> : </strong>
                                     <div class="form-group">
                                         <input ng-model="form.name" type="text" placeholder="Name" name="title" class="form-control" required />
                                     </div>
-                                    <strong>Email : </strong>
+                                    <strong translate="Email"> : </strong>
                                     <div class="form-group">
                                         <input ng-model="form.email_address" type="email" placeholder="Email" name="title" class="form-control" required />
                                     </div>
-                                    <strong>Phone : </strong>
+                                    <strong translate="Phone"> : </strong>
                                     <div class="form-group">
                                         <input ng-model="form.number1" type="text" placeholder="Phone" name="title" class="form-control" required />
                                     </div>
-                                    <strong>Address1 : </strong>
+                                    <strong translate="Address1"> : </strong>
                                     <div class="form-group">
                                         <input ng-model="form.address1" type="text" placeholder="Address1" name="title" class="form-control" />
                                     </div>
-                                    <strong>Address2 : </strong>
+                                    <strong translate="Address2"> : </strong>
                                     <div class="form-group">
                                         <input ng-model="form.address2" type="text" placeholder="Address2" name="title" class="form-control" />
                                     </div>
-                                    <strong>Country : </strong>
+                                    <strong translate="Country"> : </strong>
                                     <div class="form-group" >
                                         <select ng-model="countrySelected.selected" class="form-control" required
                                                 ng-options="item.name for item in countries track by item.id">
-                                            <option value="">Select</option>
+                                            <option value="" translate="Select"></option>
                                         </select>
                                     </div>
-                                    <strong>State : </strong>
+                                    <strong translate="State"> : </strong>
                                     <div class="form-group" >
                                         <select ng-model="stateSelected.selected" class="form-control" required
                                                 ng-options="item.name for item in states  | filter: {country_id: countrySelected.selected.id} track by item.id">
-                                            <option value="">Select</option>
+                                            <option value="" translate="Select"></option>
                                         </select>
                                     </div>
-                                    <strong>Location : </strong>
+                                    <strong translate="Location"> : </strong>
                                     <div class="form-group" >
                                         <select ng-model="locationSelected.selected" class="form-control" required
                                                 ng-options="item.name for item in locations  | filter: {state_id: stateSelected.selected.id} track by item.id">
-                                            <option value="">Select</option>
+                                            <option value="" translate="Select"></option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="submit" ng-disabled="editItem.$invalid" class="btn btn-primary">Save</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><span translate="BUTTON_CLOSE"></span></button>
+                            <button type="submit" ng-disabled="editItem.$invalid" class="btn btn-primary"><span translate="BUTTON_SAVE"></span></button>
                         </div>
                     </div>
                 </form>
@@ -251,17 +251,17 @@
                     <input ng-model="form.id" type="hidden" placeholder="Name" name="name" class="form-control" />
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                        <h4 class="modal-title">Disable Contact</h4>
+                        <h4 class="modal-title" translate="Disable_Contact"></h4>
                     </div>
                     <div class="modal-body">
                         <div class="container">
-                            <h3>Disable</h3>
-                            <p>Are you want to disable this <b>{{form.name}}</b> contact??</p>
+                            <h3 translate="Disable"></h3>
+                            <p translate="Disable_Message_Contact"><b>{{form.name}}</b></p>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-warning create-crud">Yes</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><span translate="BUTTON_CLOSE"></span></button>
+                        <button type="submit" class="btn btn-warning create-crud"><span translate="BUTTON_SAVE"></span></button>
                     </div>
                 </form>
             </div>
@@ -275,17 +275,17 @@
                     <input ng-model="form.id" type="hidden" placeholder="Name" name="name" class="form-control" />
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                        <h4 class="modal-title">Remove Contact</h4>
+                        <h4 class="modal-title" translate="Remove_Contact"></h4>
                     </div>
                     <div class="modal-body">
                         <div class="container">
-                            <h3>Delete</h3>
-                            <p>Are you want to remove this <b>{{form.name}}</b> contact??</p>
+                            <h3 translate="Delete"></h3>
+                            <p translate="Remove_Message_Contact"><b>{{form.name}}</b></p>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-warning create-crud">Yes</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><span translate="BUTTON_CLOSE"></span></button>
+                        <button type="submit" class="btn btn-danger create-crud"><span translate="Delete"></span></button>
                     </div>
                 </form>
             </div>
@@ -299,27 +299,27 @@
                     <input ng-model="form.id" type="hidden" placeholder="Name" name="name" class="form-control" />
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                        <h4 class="modal-title">View Contact</h4>
+                        <h4 class="modal-title" translate="View_Contact"></h4>
                     </div>
                     <div class="modal-body">
 
-                            &nbsp;<span><b>Name :&nbsp;</b> <span ng-bind="form.contact_name"></span></span><br /><br />
-                            &nbsp;<span><b>Email :&nbsp;</b><span ng-bind="form.email_address"></span></span><br /><br />
-                            &nbsp;<span><b>Phone :&nbsp;</b><span ng-bind="form.phone_number1"></span></span><br /><br />
-                            &nbsp;<span><b>Address :&nbsp;</b><span ng-bind="form.address1"></span>
+                            &nbsp;<span><b translate="Name"> : </b>&nbsp;&nbsp;&nbsp;&nbsp; <span ng-bind="form.contact_name"></span></span><br /><br />
+                            &nbsp;<span><b translate="Email"> :</b>&nbsp;&nbsp;&nbsp;&nbsp;<span ng-bind="form.email_address"></span></span><br /><br />
+                            &nbsp;<span><b translate="Phone"> :</b>&nbsp;&nbsp;&nbsp;&nbsp;<span ng-bind="form.phone_number1"></span></span><br /><br />
+                            &nbsp;<span><b translate="Address"> :</b>&nbsp;&nbsp;&nbsp;&nbsp;<span ng-bind="form.address1"></span>
                             <span ng-bind="form.address2"></span>
                             </span><br /><br />
-                            &nbsp;<span><b>Country :&nbsp;</b><span ng-bind="form.country_name"></span></span><br /><br />
-                            &nbsp;<span><b>State :&nbsp;</b><span ng-bind="form.state_name"></span></span><br /><br />
-                            &nbsp;<span><b>Location :&nbsp;</b><span ng-bind="form.location_name"></span></span><br /><br />
-                            &nbsp;<span><b>Date :&nbsp;</b><span ng-bind="form.created_at"></span></span><br /><br />
-                            &nbsp;<span><b>Status :&nbsp;</b><span>
-                                    <span ng-if="form.status == 1"><span class="label label-info">Active</span></span>
-                                    <span ng-if="form.status == 0"><span class="label label-default">Disable</span></span>
+                            &nbsp;<span><b translate="Country"> :</b>&nbsp;&nbsp;&nbsp;&nbsp;<span ng-bind="form.country_name"></span></span><br /><br />
+                            &nbsp;<span><b translate="State"> :</b>&nbsp;&nbsp;&nbsp;&nbsp;<span ng-bind="form.state_name"></span></span><br /><br />
+                            &nbsp;<span><b translate="Location"> :</b>&nbsp;&nbsp;&nbsp;&nbsp;<span ng-bind="form.location_name"></span></span><br /><br />
+                            &nbsp;<span><b translate="Date"> :</b>&nbsp;&nbsp;&nbsp;&nbsp;<span ng-bind="form.created_at"></span></span><br /><br />
+                            &nbsp;<span><b translate="Status"> :</b>&nbsp;&nbsp;&nbsp;&nbsp;<span>
+                                    <span ng-if="form.status == 1"><span class="label label-info" translate="Active"></span></span>
+                                    <span ng-if="form.status == 0"><span class="label label-default" translate="Disable"></span></span>
                                   </span></span><br /><br />
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><span translate="BUTTON_CLOSE"></span></button>
                     </div>
                 </form>
             </div>

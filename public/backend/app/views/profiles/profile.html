@@ -2,10 +2,10 @@
 
     <div class="row">
         <div class="col-lg-11">
-            <h1 class="page-header">Profile</h1>
+            <h1 class="page-header" translate="User_Profile"></h1>
         </div>
         <div class="col-lg-1">
-            <h1 class="page-header"><button type="button" class="btn btn-default" ng-click="goBack();">Back</button></h1>
+            <h1 class="page-header"><button type="button" class="btn btn-default" ng-click="goBack();"><span translate="BUTTON_BACK"></span></button></h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -51,18 +51,19 @@
 
                     <div class="dataTable_wrapper">
                         <table>
-                            <span><b>Name :</b></span>&nbsp;&nbsp;<span ng-bind="data.name"></span><br /><br />
-                            <span><b>Email :</b></span>&nbsp;&nbsp;<span ng-bind="data.email"></span><br /><br />
-                            <span><b>Date :</b></span>&nbsp;&nbsp;<span ng-bind="data.updated_at"></span><br /><br />
-                            <span><b>Status :</b></span>&nbsp;&nbsp;
-                            <div>
-                                    <p ng-if="data.status == 1"><span class="label label-info">Active</span></p>
-                                    <p ng-if="data.status == 0"><span class="label label-default">Disable</span></p>
-                            </div>
-                            <br /><br />
-                            <button class="btn btn-primary" data-toggle="modal" ng-click="edit(data.id)" data-target="#edit-data"><i class="fa fa-pencil"></i> Edit</button>&nbsp;
-                            <button class="btn btn-warning" ng-if="data.status == 1" data-toggle="modal" ng-click="edit(data.id)" data-target="#disable-data"><i class="fa fa-ban"></i> Disable</button>
-                            <button class="btn btn-primary" ng-if="data.status == 0" data-toggle="modal" ng-click="edit(data.id)" data-target="#enable-data"><i class="fa fa-user"></i> Enable</button>
+                            <span><b translate="Name"> :</b></span>&nbsp;&nbsp;<span ng-bind="data.name"></span><br /><br />
+                            <span><b translate="Email"> :</b></span>&nbsp;&nbsp;<span ng-bind="data.email"></span><br /><br />
+                            <span><b translate="Date"> :</b></span>&nbsp;&nbsp;<span ng-bind="data.updated_at"></span><br /><br />
+                            <span><b translate="Status"> :</b></span>&nbsp;&nbsp;
+                            <span>
+                                    <span ng-if="data.status == 1"><span class="label label-info" translate="Active"></span></span>
+                                    <span ng-if="data.status == 0"><span class="label label-default" translate="Disable"></span></span>
+                            </span>
+                            <hr />
+                            <br />
+                            <button class="btn btn-primary" data-toggle="modal" ng-click="edit(data.id)" data-target="#edit-data"><i class="fa fa-pencil"></i> <span translate="Edit"></span></button>&nbsp;
+                            <button class="btn btn-warning" ng-if="data.status == 1" data-toggle="modal" ng-click="edit(data.id)" data-target="#disable-data"><i class="fa fa-ban"></i> <span translate="Disable"></span></button>
+                            <button class="btn btn-primary" ng-if="data.status == 0" data-toggle="modal" ng-click="edit(data.id)" data-target="#enable-data"><i class="fa fa-user"></i> <span translate="Enable"></span></button>
                         </table>
                     </div>
                     <!-- /.table-responsive -->
@@ -80,27 +81,27 @@
                     <input ng-model="form.id" type="hidden" placeholder="Name" name="name" class="form-control" />
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Edit Profile</h4>
+                        <h4 class="modal-title" id="myModalLabel" translate="Edit_Profile"></h4>
                     </div>
                     <div class="modal-body">
                         <div class="container">
                             <div class="row">
                                 <div class="col-xs-12 col-sm-6 col-md-6">
-                                    <strong>Name : </strong>
+                                    <strong translate="Name"> : </strong>
                                     <div class="form-group">
                                         <input ng-model="form.name" type="text" placeholder="Name" name="title" class="form-control" required />
                                     </div>
-                                    <strong>Email : </strong>
+                                    <strong translate="Email"> : </strong>
                                     <div class="form-group">
                                         <input ng-model="form.email" type="email" placeholder="Email" name="title" class="form-control" required />
                                     </div>
-                                    <strong>Password : </strong>
+                                    <strong translate="Password"> : </strong>
                                     <div class="form-group">
                                         <input type="{{inputType}}" ng-model="form.password" type="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                                                title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" class="form-control" required>
                                         <input type="checkbox" id="checkbox" ng-model="passwordCheckbox" ng-click="hideShowPassword()" />
-                                        <label for="checkbox" ng-if="passwordCheckbox">Hide password</label>
-                                        <label for="checkbox" ng-if="!passwordCheckbox">Show password</label><br /><br />
+                                        <label for="checkbox" ng-if="passwordCheckbox" translate="Hide_Password"></label>
+                                        <label for="checkbox" ng-if="!passwordCheckbox" translate="Show_Password"></label><br /><br />
                                     </div>
                                     </div>
                                 </div>
@@ -109,8 +110,8 @@
                                 </div>
                             </div>
                             <br />
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="submit" ng-disabled="editItem.$invalid" class="btn btn-primary create-crud">Save Change</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><span translate="BUTTON_CLOSE"></span></button>
+                            <button type="submit" ng-disabled="editItem.$invalid" class="btn btn-primary create-crud"><span translate="BUTTON_SAVE"></span></button>
                         </div>
 
                 </form>
@@ -125,17 +126,17 @@
                     <input ng-model="form.id" type="hidden" placeholder="Name" name="name" class="form-control" />
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                        <h4 class="modal-title">Disable Profile</h4>
+                        <h4 class="modal-title" translate="Disable_Profile"></h4>
                     </div>
                     <div class="modal-body">
                         <div class="container">
-                            <h3>Disable</h3>
-                            <p>Are you want to disable this <b>{{form.name}}</b> account??</p>
+                            <h3 translate="Disable"></h3>
+                            <p translate="Disable_Message"><b>{{form.name}}</b></p>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-warning create-crud">Yes</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><span translate="BUTTON_CLOSE"></span></button>
+                        <button type="submit" class="btn btn-warning create-crud"><span translate="BUTTON_SAVE"></span></button>
                     </div>
                 </form>
             </div>
@@ -149,17 +150,17 @@
                     <input ng-model="form.id" type="hidden" placeholder="Name" name="name" class="form-control" />
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                        <h4 class="modal-title">Enable Profile</h4>
+                        <h4 class="modal-title" translate="Enable_Profile"></h4>
                     </div>
                     <div class="modal-body">
                         <div class="container">
-                            <h3>Enable</h3>
-                            <p>Are you want to enable this <b>{{form.name}}</b> account??</p>
+                            <h3 translate="Enable"></h3>
+                            <p translate="Enable_Message"><b>{{form.name}}</b></p>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-warning create-crud">Yes</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><span translate="BUTTON_CLOSE"></span></button>
+                        <button type="submit" class="btn btn-primary create-crud"><span translate="BUTTON_SAVE"></span></button>
                     </div>
                 </form>
             </div>

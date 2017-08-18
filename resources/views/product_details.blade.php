@@ -28,6 +28,7 @@
 
     <script src="/bower_components/angular/angular.min.js"></script>
     <script src="/frontend/scripts/app.js"></script>
+    <script src="/frontend/scripts/home.controller.js"></script>
     <script src="/frontend/scripts/detail.controller.js"></script>
     <script src="/frontend/scripts/unique.js"></script>
     <script src="/backend/app/packages/dirPagination.js"></script>
@@ -37,12 +38,22 @@
     <script src="/bower_components/angular-encode-uri/dist/angular-encode-uri.min.js"></script>
     <script src="/bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
     <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.3.0.js"></script>
+    <script src="/bower_components/angular-translate/angular-translate.min.js"></script>
 
 </head>
 <body ng-app="app" ng-controller="IdDetailController">
 <div id="loading-bar-container"></div>
 <div id="header">
     <div class="container">
+        <div id="welcomeLine" class="row">
+            <div class="span6"><span translate="Welcome"></span><strong></strong></div>
+            <div class="span6">
+                <div class="pull-right">
+                    <span class="btn btn-mini" ng-click="changeLanguage('en')" translate="BUTTON_LANG_EN" class="ng-scope"></span>
+                    <span class="btn btn-mini" ng-click="changeLanguage('de')" translate="BUTTON_LANG_DE" class="ng-scope"></span>
+                </div>
+            </div>
+        </div>
         <div id="logoArea" class="navbar">
             <a id="smallScreen" data-target="#topMenu" data-toggle="collapse" class="btn btn-navbar">
                 <span class="icon-bar"></span>
@@ -55,15 +66,15 @@
                 <form class="form-inline navbar-search" method="post" >
                     <input class="srchTxt" ng-model="searchText" type="text" placeholder="search..."/>
                     <select ng-model="selectedBrands" ng-options="item.id as item.name for item in brands">
-                        <option value="">Selected</option>
+                        <option value="" translate="Select"></option>
                     </select>
-                    <button type="button" id="submitButton" class="btn btn-primary" ng-click="filterByBrandID(selectedBrands)">Go</button>
+                    <button type="button" id="submitButton" class="btn btn-primary" ng-click="filterByBrandID(selectedBrands)"><span translate="Go"></span></button>
                 </form>
                 <ul id="topMenu" class="nav pull-right">
-                    <li class=""><a href="/about.html">About</a></li>
-                    <li class=""><a href="/contact.html">Contact</a></li>
+                    <li class=""><a href="/about.html"><span translate="About_Menu"></span></a></li>
+                    <li class=""><a href="/contact.html"><span translate="Contact_Menu"></span></a></li>
                     <li class="">
-                        <a href="/admin" role="button"  style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
+                        <a href="/admin" role="button"  style="padding-right:0"><span class="btn btn-large btn-success"><span translate="Post_Item"></span></span></a>
                     </li>
                 </ul>
             </div>
@@ -77,7 +88,9 @@
         <div class="row">
             <!-- Sidebar ================================================== -->
             <div id="sidebar" class="span3">
-
+                <div class="well well-small">
+                    <small translate="Brand_Type"></small>
+                </div>
                 <accordion>
                     <accordion-group heading="[[group.name]]" ng-click="getId(group.id)" ng-repeat="group in brands">
                         <ul>
@@ -90,15 +103,15 @@
                 <div class="thumbnail">
                     <img src="/frontend/themes/images/payment_methods.png" title="Bootshop Payment Methods" alt="Payments Methods">
                     <div class="caption">
-                        <h5>Payment Methods</h5>
+                        <h5 translate="Payment_Method"></h5>
                     </div>
                 </div>
             </div>
             <!-- Sidebar end=============================================== -->
             <div class="span9">
                 <ul class="breadcrumb">
-                    <li><a href="/">Home</a> <span class="divider">/</span></li>
-                    <li class="active">product Details</li>
+                    <li><a href="/"><span translate="Home"></span></a> <span class="divider">/</span></li>
+                    <li class="active" translate="Item_Detail"></li>
                 </ul>
                 <div class="row">
                     <div id="gallery" class="span3">
@@ -135,19 +148,22 @@
                         <hr class="soft"/>
                         <form class="form-horizontal qtyFrm">
                             <div class="control-group">
-                                <label class="control-label"><span>${{ $object->price }} | {{ $object->product_type }} <br /><br />
-                                        <span ng-if="{{$object->status}} == 1">Available</span>
-                                        <span ng-if="{{$object->status}} == 0">Not Available</span>
+                                <label class="control-label"><span>$ {{ $object->price }} |
+                                        <span ng-if="{{$object->product_type}} == New" style="color:orange" translate="Item_New"></span>
+                                        <span ng-if="{{$object->product_type}} == Used" style="color:grey" translate="Item_Used"></span>
+                                        <br /><br />
+                                        <span ng-if="{{$object->status}} == 1" translate="Available"></span>
+                                        <span ng-if="{{$object->status}} == 0" translate="Not_Available"></span>
                                     </span></label>
                                 <div class="controls">
                                     <input type="number" class="span1" placeholder="Qty."/>
-                                    <button type="submit" class="btn btn-large btn-primary pull-right"> Add to cart <i class=" icon-shopping-cart"></i></button>
+                                    <button type="submit" class="btn btn-large btn-primary pull-right"> <span translate="Add_To_Card"></span> <i class=" icon-shopping-cart"></i></button>
                                 </div>
                             </div>
                         </form>
 
                         <hr class="soft"/>
-                        <label class="control-label">Color : <span>{{ $object->product_color }}</span></label>
+                        <label class="control-label"><span translate="Color"></span> : <span>{{ $object->product_color }}</span></label>
                         {{--<h4>100 items in stock</h4>--}}
                         {{--<form class="form-horizontal qtyFrm pull-right">--}}
                             {{--<div class="control-group">--}}
@@ -166,49 +182,53 @@
                         <p>
                             {{ $object->description }}
                         </p>
-                        <a class="btn btn-small pull-right" href="#detail">More Details</a>
+                        <a class="btn btn-small pull-right" href="#detail"><span translate="More_Detail"></span></a>
                         <br class="clr"/>
                         <a href="#" name="detail"></a>
                         <hr class="soft"/>
                     </div>
                     <div class="span9">
                         <ul id="productDetail" class="nav nav-tabs">
-                            <li class="active"><a href="#home" data-toggle="tab">Product Details</a></li>
-                            <li><a href="#profile" data-toggle="tab">Related Products</a></li>
+                            <li class="active"><a href="#home" data-toggle="tab"><span translate="Item_Detail"></span></a></li>
+                            <li><a href="#profile" data-toggle="tab"><span translate="Related_Item"></span></a></li>
                         </ul>
                         <div id="myTabContent" class="tab-content">
                             <div class="tab-pane fade active in" id="home">
-                                <h4>Product Information</h4>
+                                <h4 translate="Item_Information"></h4>
                                 <table class="table table-bordered">
                                     <tbody>
-                                    <tr class="techSpecRow"><th colspan="2">Product Details</th></tr>
-                                    <tr class="techSpecRow"><td class="techSpecTD1">Brand: </td><td class="techSpecTD2">{{ $object->brand_name }}</td></tr>
-                                    <tr class="techSpecRow"><td class="techSpecTD1">Category: </td><td class="techSpecTD2">{{ $object->category_name }}</td></tr>
-                                    <tr class="techSpecRow"><td class="techSpecTD1">Model:</td><td class="techSpecTD2">{{ $object->product_name }}</td></tr>
-                                    <tr class="techSpecRow"><td class="techSpecTD1">Released on:</td><td class="techSpecTD2">{{ $object->created_at }}</td></tr>
-                                    <tr class="techSpecRow"><td class="techSpecTD1">Specification:</td><td class="techSpecTD2">{!! $object->specification !!}</td></tr>
+                                    <tr class="techSpecRow"><th colspan="2"><span translate="Item_Detail"></span></th></tr>
+                                    <tr class="techSpecRow"><td class="techSpecTD1"><span translate="Brand"></span></td><td class="techSpecTD2">{{ $object->brand_name }}</td></tr>
+                                    <tr class="techSpecRow"><td class="techSpecTD1"><span translate="Category"></span></td><td class="techSpecTD2">{{ $object->category_name }}</td></tr>
+                                    <tr class="techSpecRow"><td class="techSpecTD1"><span translate="Model"></span></td><td class="techSpecTD2">{{ $object->product_name }}</td></tr>
+                                    <tr class="techSpecRow"><td class="techSpecTD1"><span translate="Released_On"></span></td><td class="techSpecTD2">{{ $object->created_at }}</td></tr>
+                                    <tr class="techSpecRow"><td class="techSpecTD1"><span translate="Specification"></span></td><td class="techSpecTD2">{!! $object->specification !!}</td></tr>
                                     </tbody>
                                 </table>
 
-                                <h5>Contact</h5>
-                                <p>
-                                    <span>Name :  &nbsp;&nbsp;&nbsp;&nbsp;<b>{{$object->contact_name}}</b></span>  <br />
-                                    <span>Number : &nbsp;<b>{{$object->phone_number}}</b></span>  <br />
-                                    <span>Email : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>{{$object->email_address}}</b></span>  <br />
-                                    <span>Address :&nbsp;<b>{{$object->address1}}</b></span> && <span>&nbsp;<b>{{$object->address2}}</b></span>&nbsp;&&
-                                    <span>&nbsp;<b>{{$object->country_name}}</b></span>  && <span>&nbsp;<b>{{$object->state_name}}</b></span> && <span>&nbsp;<b>{{$object->location_name}}</b></span>
-                                </p>
-
+                                <h5 translate="Contact_Information"></h5>
+                                <table class="table table-bordered">
+                                    <tbody>
+                                    <tr class="techSpecRow"><th colspan="2"><span translate="Contact_Detail"></span></th></tr>
+                                    <tr class="techSpecRow"><td class="techSpecTD1"><span translate="Name"></span></td><td class="techSpecTD2">{{ $object->contact_name }}</td></tr>
+                                    <tr class="techSpecRow"><td class="techSpecTD1"><span translate="Number"></span></td><td class="techSpecTD2">{{ $object->phone_number }}</td></tr>
+                                    <tr class="techSpecRow"><td class="techSpecTD1"><span translate="Email"></span></td><td class="techSpecTD2">{{ $object->email_address }}</td></tr>
+                                    <tr class="techSpecRow"><td class="techSpecTD1"><span translate="Address"></span></td><td class="techSpecTD2">
+                                            {{$object->location_name}}&nbsp;&nbsp;{{$object->state_name}}&nbsp;&nbsp;
+                                            {{$object->country_name}}&nbsp;&nbsp;{{ $object->address1 }}&nbsp;&nbsp;{{ $object->address2 }}
+                                        </td></tr>
+                                    </tbody>
+                                </table>
 
                             </div>
                             <div class="tab-pane fade" id="profile">
                                 <form class="form-horizontal span6">
                                     <div class="control-group">
-                                        <label class="control-label alignL">Sort By </label>
+                                        <label class="control-label alignL"><span translate="Sort_By"></span></label>
                                         <select ng-model="sortExpression">
-                                            <option value="" selected="selected">Product name A - Z</option>
-                                            <option value="price">Price $0 - Unlimited</option>
-                                            <option value="category_id">Category name A - Z</option>
+                                            <option value="" selected="selected" translate="Item_Name_A_Z"></option>
+                                            <option value="price" translate="Item_Price_Low_Up"></option>
+                                            <option value="category_id" translate="Item_Cate_Name_A_Z"></option>
                                         </select>
                                     </div>
                                 </form>
@@ -225,15 +245,21 @@
                                                 <img src="../../../../../[[value.photo_name]]" height="142" width="142">
                                             </div>
                                             <div class="span4">
-                                                <h3>[[value.product_type]] | <span ng-if="value.status == 1">Available</span><span ng-if="value.status == 0">Not Available</span> </h3>
-                                                <hr class="soft"/>
+                                                <h4>
+                                                    <span style="color: orange" ng-if="value.product_type == 'New'" translate="Item_New"></span>
+                                                    <span style="color: grey" ng-if="value.product_type == 'Used'" translate="Item_Used"></span>
+                                                    |
+                                                    <span ng-if="value.status == 1" translate="Available"></span>
+                                                    <span ng-if="value.status == 0" translate="Not_Available"></span>
+                                                </h4>
+
                                                 <h5>[[ value.product_name ]] | [[value.category_name]] </h5>
                                                 <p>
-                                                    Nowadays the lingerie industry is one of the most successful business spheres.We always stay in touch with the latest fashion tendencies -
-                                                    that is why our goods are so popular..
+                                                    [[value.description]]
                                                 </p>
-                                                <a class="btn btn-small pull-right" href="/product_detail.html/[[ value.product_id]][[ 'bar&baz'  | encodeURIComponent ]]">View Details</a>
+                                                <a class="btn btn-small pull-right" href="/product_detail.html/[[ value.product_id]][[ 'bar&baz'  | encodeURIComponent ]]"><span translate="Button_View_Detail"></span></a>
                                                 <br class="clr"/>
+                                                <hr />
                                             </div>
 
                                             <div class="span3 alignR">
@@ -295,33 +321,33 @@
         <div class="row">
             <div class="span3">
                 <h5>ACCOUNT</h5>
-                <a href="login.html">YOUR ACCOUNT</a>
-                <a href="login.html">PERSONAL INFORMATION</a>
-                <a href="login.html">ADDRESSES</a>
-                <a href="login.html">DISCOUNT</a>
-                <a href="login.html">ORDER HISTORY</a>
+                <a href="">YOUR ACCOUNT</a>
+                <a href="">PERSONAL INFORMATION</a>
+                <a href="">ADDRESSES</a>
+                <a href="">DISCOUNT</a>
+                <a href="">ORDER HISTORY</a>
             </div>
             <div class="span3">
                 <h5>INFORMATION</h5>
-                <a href="contact.html">CONTACT</a>
-                <a href="register.html">REGISTRATION</a>
-                <a href="legal_notice.html">LEGAL NOTICE</a>
-                <a href="tac.html">TERMS AND CONDITIONS</a>
-                <a href="faq.html">FAQ</a>
+                <a href="">CONTACT</a>
+                <a href="">REGISTRATION</a>
+                <a href="">LEGAL NOTICE</a>
+                <a href="">TERMS AND CONDITIONS</a>
+                <a href="">FAQ</a>
             </div>
             <div class="span3">
                 <h5>OUR OFFERS</h5>
-                <a href="#">NEW PRODUCTS</a>
-                <a href="#">TOP SELLERS</a>
-                <a href="special_offer.html">SPECIAL OFFERS</a>
-                <a href="#">MANUFACTURERS</a>
-                <a href="#">SUPPLIERS</a>
+                <a href="">NEW PRODUCTS</a>
+                <a href="">TOP SELLERS</a>
+                <a href="">SPECIAL OFFERS</a>
+                <a href="">MANUFACTURERS</a>
+                <a href="">SUPPLIERS</a>
             </div>
             <div id="socialMedia" class="span3 pull-right">
-                <h5>SOCIAL MEDIA </h5>
-                <a href="#"><img width="60" height="60" src="/frontend/themes/images/facebook.png" title="facebook" alt="facebook"/></a>
-                <a href="#"><img width="60" height="60" src="/frontend/themes/images/twitter.png" title="twitter" alt="twitter"/></a>
-                <a href="#"><img width="60" height="60" src="/frontend/themes/images/youtube.png" title="youtube" alt="youtube"/></a>
+                <h5 translate="SOCIAL_MEDIA"></h5>
+                <a href=""><img width="60" height="60" src="/frontend/themes/images/facebook.png" title="facebook" alt="facebook"/></a>
+                <a href=""><img width="60" height="60" src="/frontend/themes/images/twitter.png" title="twitter" alt="twitter"/></a>
+                <a href=""><img width="60" height="60" src="/frontend/themes/images/youtube.png" title="youtube" alt="youtube"/></a>
             </div>
         </div>
         <p class="pull-right">&copy; 168myshop.com</p>

@@ -63,7 +63,7 @@ angular.module('app')
         return window.encodeURIComponent;
     })
 
-    .controller('IdController', function (dataFactory,$scope, $http) {
+    .controller('IdController', function (dataFactory,$scope, $translate) {
 
         $scope.limit = 4;
         $scope.data = [];
@@ -72,6 +72,10 @@ angular.module('app')
         $scope.totalItems = 0;
         $scope.selectedprop = {};
         $scope.selectedBrands = {};
+
+        $scope.changeLanguage = function (key) {
+            $translate.use(key);
+        };
 
         $scope.getId = function (id) {
             loadCategoryByBrand(1,id);

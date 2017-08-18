@@ -61,14 +61,19 @@ angular.module('app')
         return window.encodeURIComponent;
     })
 
-    .controller('IdDetailController', function (dataFactory,$scope) {
+    .controller('IdDetailController', function (dataFactory,$scope,$translate) {
         $scope.limit = 4;
         $scope.data = [];
         $scope.libraryTemp = {};
         $scope.totalItemsTemp = {};
         $scope.totalItems = 0;
         $scope.selectedBrands = {};
+        $scope.New = 'New';
+        $scope.Used = 'Used';
 
+        $scope.changeLanguage = function (key) {
+            $translate.use(key);
+        };
 
         $scope.pageChanged = function(newPage) {
             getResultsPage(newPage);
