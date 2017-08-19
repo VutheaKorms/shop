@@ -62,6 +62,9 @@ angular
                 Email_Us : 'Email Us',
                 Subject : 'Subject',
                 Send_Message : 'Send Message',
+                Mon_Fri : 'Monday - Friday',
+                Saturday : 'Saturday',
+                Sunday : 'Sunday',
             });
             $translateProvider.translations('de', {
                 BUTTON_LANG_EN: 'អង់គ្លេស',
@@ -110,6 +113,9 @@ angular
                 Email_Us : 'អ៊ីម៉ែលមកកាន់ពួកយើង',
                 Subject : 'ប្រធានបទ',
                 Send_Message : 'ផ្ញើ​សារ',
+                Mon_Fri : 'ថ្ងៃច័ន្ទដល់ថ្ងៃសុក្រ',
+                Saturday : 'ថ្ងៃសៅរ៍',
+                Sunday : 'ថ្ងៃអាទិត្យ',
             });
             $translateProvider.preferredLanguage('en');
 

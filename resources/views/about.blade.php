@@ -16,6 +16,22 @@
     <link href="/frontend/themes/css/font-awesome.css" rel="stylesheet" type="text/css">
     <!-- Google-code-prettify -->
     <link href="/frontend/themes/js/google-code-prettify/prettify.css" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.js"></script>
+
+    <script src="/bower_components/angular/angular.min.js"></script>
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.3.0.js"></script>
+
+    <script src="/frontend/scripts/app.js"></script>
+    <script src="/frontend/scripts/home.controller.js"></script>
+    <script src="/frontend/scripts/unique.js"></script>
+    <script src="/backend/app/packages/dirPagination.js"></script>
+    <script src="/backend/app/services/myServices.js"></script>
+    <script src="/backend/app/helper/myHelper.js"></script>
+
+    <script src="/bower_components/angular-encode-uri/dist/angular-encode-uri.min.js"></script>
+    <script src="/bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
+    <script src="/bower_components/angular-translate/angular-translate.min.js"></script>
     <!-- fav and touch icons -->
     <link rel="shortcut icon" href="/frontend/themes/images/ico/favicon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/frontend/themes/images/ico/apple-touch-icon-144-precomposed.png">
@@ -24,9 +40,18 @@
     <link rel="apple-touch-icon-precomposed" href="/frontend/themes/images/ico/apple-touch-icon-57-precomposed.png">
     <style type="text/css" id="enject"></style>
 </head>
-<body>
+<body ng-app="app" ng-controller="IdController">
 <div id="header">
     <div class="container">
+        <div id="welcomeLine" class="row">
+            <div class="span6"><span translate="Welcome"></span><strong></strong></div>
+            <div class="span6">
+                <div class="pull-right">
+                    <span class="btn btn-mini" ng-click="changeLanguage('en')" translate="BUTTON_LANG_EN" class="ng-scope"></span>
+                    <span class="btn btn-mini" ng-click="changeLanguage('de')" translate="BUTTON_LANG_DE" class="ng-scope"></span>
+                </div>
+            </div>
+        </div>
         <div id="logoArea" class="navbar">
             <a id="smallScreen" data-target="#topMenu" data-toggle="collapse" class="btn btn-navbar">
                 <span class="icon-bar"></span>
@@ -36,15 +61,16 @@
             <div class="navbar-inner">
                 {{--<a class="brand" href="index.html"><img src="frontend/themes/images/logo.png" alt="Bootsshop"/></a>--}}
                 <a class="brand" href="/"><img src="/frontend/themes/images/ico-cart.png" alt="168myshop.com"/> 168myshop.com</a>
-                <form class="form-inline navbar-search" action="/">
-                    <input class="srchTxt" ng-model="searchText" type="text" placeholder="search..."/>
-                    <button type="submit" id="submitButton" class="btn btn-primary" ng-click="searchDB()">Go</button>
-                </form>
+                {{--<form class="form-inline navbar-search" action="/">--}}
+                    {{--<input class="srchTxt" ng-model="searchText" type="text" placeholder="search..."/>--}}
+                    {{--<button type="submit" id="submitButton" class="btn btn-primary" ng-click="searchDB()">Go</button>--}}
+                {{--</form>--}}
                 <ul id="topMenu" class="nav pull-right">
-                    <li class=""><a href="/about.html">About</a></li>
-                    <li class=""><a href="/contact.html">Contact</a></li>
+                    <li class=""><a href="/"><span translate="Home"></span></a></li>
+                    <li class=""><a href="/about.html"><span translate="About_Menu"></span></a></li>
+                    <li class=""><a href="/contact.html"><span translate="Contact_Menu"></span></a></li>
                     <li class="">
-                        <a href="/admin" role="button"  style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
+                        <a href="/admin" role="button"  style="padding-right:0"><span class="btn btn-large btn-success"><span translate="Post_Item"></span></span></a>
                     </li>
                 </ul>
             </div>
@@ -61,15 +87,15 @@
                 <div class="thumbnail">
                     <img src="/frontend/themes/images/payment_methods.png" title="Bootshop Payment Methods" alt="Payments Methods">
                     <div class="caption">
-                        <h5>Payment Methods</h5>
+                        <h5 translate="Payment_Method"></h5>
                     </div>
                 </div>
             </div>
             <!-- Sidebar end=============================================== -->
             <div class="span9">
                 <ul class="breadcrumb">
-                    <li><a href="/">Home</a> <span class="divider">/</span></li>
-                    <li class="active">About</li>
+                    <li><a href="/"><span translate="Home"></span></a> <span class="divider">/</span></li>
+                    <li class="active"><span translate="About_Menu"></span></li>
                 </ul>
                 <h3> Legal</h3>
                 <hr class="soft"/>
@@ -114,33 +140,33 @@
         <div class="row">
             <div class="span3">
                 <h5>ACCOUNT</h5>
-                <a href="login.html">YOUR ACCOUNT</a>
-                <a href="login.html">PERSONAL INFORMATION</a>
-                <a href="login.html">ADDRESSES</a>
-                <a href="login.html">DISCOUNT</a>
-                <a href="login.html">ORDER HISTORY</a>
+                <a href="">YOUR ACCOUNT</a>
+                <a href="">PERSONAL INFORMATION</a>
+                <a href="">ADDRESSES</a>
+                <a href="">DISCOUNT</a>
+                <a href="">ORDER HISTORY</a>
             </div>
             <div class="span3">
                 <h5>INFORMATION</h5>
-                <a href="contact.html">CONTACT</a>
-                <a href="register.html">REGISTRATION</a>
-                <a href="legal_notice.html">LEGAL NOTICE</a>
-                <a href="tac.html">TERMS AND CONDITIONS</a>
-                <a href="faq.html">FAQ</a>
+                <a href="">CONTACT</a>
+                <a href="">REGISTRATION</a>
+                <a href="">LEGAL NOTICE</a>
+                <a href="">TERMS AND CONDITIONS</a>
+                <a href="">FAQ</a>
             </div>
             <div class="span3">
                 <h5>OUR OFFERS</h5>
-                <a href="#">NEW PRODUCTS</a>
-                <a href="#">TOP SELLERS</a>
-                <a href="special_offer.html">SPECIAL OFFERS</a>
-                <a href="#">MANUFACTURERS</a>
-                <a href="#">SUPPLIERS</a>
+                <a href="">NEW PRODUCTS</a>
+                <a href="">TOP SELLERS</a>
+                <a href="">SPECIAL OFFERS</a>
+                <a href="">MANUFACTURERS</a>
+                <a href="">SUPPLIERS</a>
             </div>
             <div id="socialMedia" class="span3 pull-right">
-                <h5>SOCIAL MEDIA </h5>
-                <a href="#"><img width="60" height="60" src="/frontend/themes/images/facebook.png" title="facebook" alt="facebook"/></a>
-                <a href="#"><img width="60" height="60" src="/frontend/themes/images/twitter.png" title="twitter" alt="twitter"/></a>
-                <a href="#"><img width="60" height="60" src="/frontend/themes/images/youtube.png" title="youtube" alt="youtube"/></a>
+                <h5 translate="SOCIAL_MEDIA"></h5>
+                <a href=""><img width="60" height="60" src="/frontend/themes/images/facebook.png" title="facebook" alt="facebook"/></a>
+                <a href=""><img width="60" height="60" src="/frontend/themes/images/twitter.png" title="twitter" alt="twitter"/></a>
+                <a href=""><img width="60" height="60" src="/frontend/themes/images/youtube.png" title="youtube" alt="youtube"/></a>
             </div>
         </div>
         <p class="pull-right">&copy; 168myshop.com</p>
