@@ -62,7 +62,7 @@
             </a>
             <div class="navbar-inner">
                 {{--<a class="brand" href="index.html"><img src="frontend/themes/images/logo.png" alt="Bootsshop"/></a>--}}
-                <a class="brand" href="/"><img src="/frontend/themes/images/ico-cart.png" alt="168myshop.com"/> 168myshop.com</a>
+                <a class="brand" href="/">168myshop.com</a>
                 <form class="form-inline navbar-search" method="post" >
                     <input class="srchTxt" ng-model="searchText" type="text" placeholder="search..."/>
                     <select ng-model="selectedBrands" ng-options="item.id as item.name for item in brands">
@@ -71,6 +71,7 @@
                     <button type="button" id="submitButton" class="btn btn-primary" ng-click="filterByBrandID(selectedBrands)"><span translate="Go"></span></button>
                 </form>
                 <ul id="topMenu" class="nav pull-right">
+                    <li class=""><a href="/"><span translate="Home"></span></a></li>
                     <li class=""><a href="/about.html"><span translate="About_Menu"></span></a></li>
                     <li class=""><a href="/contact.html"><span translate="Contact_Menu"></span></a></li>
                     <li class="">

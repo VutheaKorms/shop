@@ -45,7 +45,7 @@ class ItemController extends Controller
             ->orWhere('products.product_name','LIKE',"%{$request->get('search')}%")
             ->orWhere('products.created_at','LIKE',"%{$request->get('search')}%")
             ->orderBy('products.created_at', 'asc')
-            ->paginate(6);
+            ->paginate(9);
 
         return response($products);
 

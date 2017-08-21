@@ -65,6 +65,7 @@ angular
                 Mon_Fri : 'Monday - Friday',
                 Saturday : 'Saturday',
                 Sunday : 'Sunday',
+                No_Item_Found : 'No Item Found',
             });
             $translateProvider.translations('de', {
                 BUTTON_LANG_EN: 'អង់គ្លេស',
@@ -116,6 +117,7 @@ angular
                 Mon_Fri : 'ថ្ងៃច័ន្ទដល់ថ្ងៃសុក្រ',
                 Saturday : 'ថ្ងៃសៅរ៍',
                 Sunday : 'ថ្ងៃអាទិត្យ',
+                No_Item_Found : 'ស្វែងរកផលិតផលមិនឃើញ',
             });
             $translateProvider.preferredLanguage('en');
 

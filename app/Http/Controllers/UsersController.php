@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Validator;
 use App\User;
 use Auth;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Facades\Input;
 
 class UsersController extends Controller
 {
@@ -14,17 +16,17 @@ class UsersController extends Controller
         $this->response = $response;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-//        $input = $request->all();
-//        if($request->get('search')){
-//            $users = User::where("name", "LIKE", "%{$request->get('search')}%")
-//                ->orWhere('created_at','LIKE',"%{$request->get('search')}%")
-//                ->paginate(5);
-//        }else{
-//            $users = User::paginate(5);
-//        }
-        $users = User::get();
+        $input = $request->all();
+        if($request->get('search')){
+            $users = User::where("name", "LIKE", "%{$request->get('search')}%")
+                ->orWhere('created_at','LIKE',"%{$request->get('search')}%")
+                ->paginate(5);
+        }else{
+            $users = User::paginate(5);
+        }
+        //$users = User::get();
         return response($users);
     }
 
@@ -82,7 +84,7 @@ class UsersController extends Controller
     }
 
 
-//    public function show($id)
+//    public function show_user($id)
 //    {
 //        $item = User::find($id);
 //        return response($item);
@@ -94,8 +96,20 @@ class UsersController extends Controller
         return response($item);
     }
 
-    public  function update(Request $request, $id)
+    public  function update(Request $request , $id)
     {
+        $rules = array(
+            'name' => 'required',
+            'password' => 'required|min:8',
+            'email' => 'required|email|unique:users'
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+
+        }
+
         $user = User::findOrFail($id);
         $user->name = $request['name'];
         $user->email = $request['email'];
@@ -104,18 +118,40 @@ class UsersController extends Controller
         }
         $user->save();
         return response($user);
+
     }
 
     public function store(Request $request)
     {
-        $input = $request->all();
-        $create = User::create($input);
-        return response($create);
+        $rules = array(
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6',
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+
+        } else {
+            $user = new User();
+            $user->name = $request['name'];
+            $user->email = $request['email'];
+            if ($request->has('password'))  {
+                $user->password = bcrypt($request->input('password'));
+            }
+            $user->save();
+            return response($user);
+        }
+
+
     }
 
     public function destroy($id)
     {
-        return User::where('id',$id)->delete();
+        //return User::where('id',$id)->delete();
+        $user = DB::delete('delete from users where id = ?',[$id]);
+        return response($user);
     }
 
     public  function disable(Request $request, $id)

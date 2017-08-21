@@ -136,7 +136,16 @@ angular
           Remove_Photo : 'Remove Photo',
           Remove_Photo_Message : 'Are you want to remove this photo?',
           BUTTON_NEXT : 'Next',
-
+          User_Client : 'Manage User',
+          No_User_Found : 'No User Found',
+          User_Detail : 'View User',
+          Remove_User_Message : 'Are you want to remove this user account?',
+          Remove_User : 'Remove User Account',
+          Disable_User_Message : 'Are you want to disable this user account?',
+          Disable_User : 'Disable User Account',
+          Enable_User_Message : 'Are you want to enable this user account?',
+          Enable_User : 'Enable User Account',
+          Edit_User : 'Edit User Account',
       });
       $translateProvider.translations('de', {
           Dashboard: 'ផ្ទាំងគ្រប់គ្រង',
@@ -245,6 +254,16 @@ angular
           Remove_Photo : 'លុបរូបផលិតផល',
           Remove_Photo_Message : 'តើអ្នកចង់លុបរូបថតនេះចេញឬ?',
           BUTTON_NEXT : 'បន្ទាប់',
+          User_Client : 'គ្រប់គ្រងអ្នកប្រើប្រាស់',
+          No_User_Found : 'រកមិនឃើញអ្នកប្រើ',
+          User_Detail : 'មើលអ្នកប្រើប្រាស់លំអិត',
+          Remove_User_Message : 'តើអ្នកពិតជាចង់លុបគណនីនេះមែនទេ?',
+          Remove_User : 'លុបគណីអ្នកប្រើប្រាស់',
+          Disable_User_Message : 'តើអ្នកពិតជាចង់បិទគណីប្រើប្រាស់នេះមែនទែ?',
+          Enable_User_Message : 'តើអ្នកពិតជាចង់បើកគណីប្រើប្រាស់នេះមែនទេ?',
+          Enable_User : 'បើកគណីប្រើប្រាស់',
+          Disable_User : 'បិទគណីប្រើប្រាស់',
+          Edit_User : 'កែប្រែគណីប្រើប្រាស់',
       });
       $translateProvider.preferredLanguage('en');
 
@@ -372,6 +391,22 @@ angular
                     name:'app',
                     files:[
                         'backend/app/scripts/controllers/brands/brand.js'
+                    ]
+                })
+            }
+        }
+    })
+
+    .state('dashboard.user',{
+        url:'/user-management',
+        controller: 'UserCtrl',
+        templateUrl:'backend/app/views/profiles/user.html',
+        resolve: {
+            loadMyFiles:function($ocLazyLoad) {
+                return $ocLazyLoad.load({
+                    name:'app',
+                    files:[
+                        'backend/app/scripts/controllers/profiles/user.js'
                     ]
                 })
             }
@@ -524,7 +559,7 @@ angular
     })
 
     .state('dashboard.cover',{
-        url:'/cover',
+        url:'/cover-management',
         controller: 'CoverCtrl',
         templateUrl:'backend/app/views/profiles/cover.html',
         resolve: {

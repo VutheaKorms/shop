@@ -128,8 +128,8 @@
 
                     @yield('content')
 
-                    <li><a href="{{ route('login') }}">Login</a></li>
-                    <li><a href="{{ route('register') }}">Register</a></li>
+                    {{--<li><a href="{{ route('login') }}">Login</a></li>--}}
+                    {{--<li><a href="{{ route('register') }}">Register</a></li>--}}
                 @else
 
                     <li class="dropdown" style="cursor: pointer; cursor: hand;">

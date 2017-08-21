@@ -60,7 +60,7 @@
             </a>
             <div class="navbar-inner">
                 {{--<a class="brand" href="index.html"><img src="frontend/themes/images/logo.png" alt="Bootsshop"/></a>--}}
-                <a class="brand" href="/"><img src="/frontend/themes/images/ico-cart.png" alt="168myshop.com"/> 168myshop.com</a>
+                <a class="brand" href="/">168myshop.com</a>
                 {{--<form class="form-inline navbar-search" action="/">--}}
                     {{--<input class="srchTxt" ng-model="searchText" type="text" placeholder="search..."/>--}}
                     {{--<button type="submit" id="submitButton" class="btn btn-primary" ng-click="searchDB()">Go</button>--}}

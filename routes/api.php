@@ -19,6 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('users','UsersController');
+//    Route::get('users/user/{id}','UsersController@show_user');
     Route::put('users/update/{id}','UsersController@updateUser');
     Route::put('user/disable/{id}','UsersController@disable');
     Route::put('user/enable/{id}','UsersController@enable');

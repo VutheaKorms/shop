@@ -69,7 +69,7 @@
             </a>
             <div class="navbar-inner">
                 {{--<a class="brand" href="index.html"><img src="frontend/themes/images/logo.png" alt="Bootsshop"/></a>--}}
-                <a class="brand" href="/"><img src="frontend/themes/images/ico-cart.png" alt="168myshop.com"/> 168myshop.com</a>
+                <a class="brand" href="/">168myshop.com</a>
                 <form class="form-inline navbar-search" method="post" >
                     <input class="srchTxt" ng-model="searchText" type="text" placeholder="search..."/>
                     <select ng-model="selectedBrands" ng-options="item.id as item.name for item in brands">
@@ -183,7 +183,12 @@
                 <br class="clr"/>
                 <div class="tab-content">
                     <div class="tab-pane" id="listView">
-                        <div class="row" dir-paginate="value in data | itemsPerPage:6 | orderBy:mySortFunction" total-items="totalItems">
+                        <div ng-if="data == null || data.length <= 0">
+                            <span class="bold text-center">
+                                <p style="text-align: center" translate=" No_Item_Found"></p>
+                            </span>
+                        </div>
+                        <div class="row" dir-paginate="value in data | itemsPerPage:9 | orderBy:mySortFunction" total-items="totalItems">
                         {{--<div class="row" dir-paginate="value in data | itemsPerPage:6 t| filter:showca | orderBy:mySortFunction" total-items="totalItems">--}}
                             <div class="span2">
                                 <img src="../../../../../[[value.photo_name]]" height="142" width="142">
@@ -222,9 +227,13 @@
                         <hr class="soft"/>
                     </div>
                     <div class="tab-pane  active" id="blockView">
+                        <div ng-if="data == null || data.length <= 0">
+                            <span class="bold text-center">
+                                <p style="text-align: center" translate=" No_Item_Found"></p>
+                            </span>
+                        </div>
                         <ul class="thumbnails">
-
-                            <li class="span3" dir-paginate="value in data | itemsPerPage:6 | orderBy:mySortFunction " total-items="totalItems">
+                            <li class="span3" dir-paginate="value in data | itemsPerPage:9 | orderBy:mySortFunction " total-items="totalItems">
                             {{--<li class="span3" dir-paginate="value in data | itemsPerPage:6  | filter:showcat | orderBy:mySortFunction " total-items="totalItems">--}}
                                 <div class="thumbnail">
                                     <span ng-if="value.product_type == 'New'"><i class="tag"></i></span>
