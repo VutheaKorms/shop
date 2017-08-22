@@ -36,6 +36,7 @@ Route::get('brands/{id}','BrandsController@show');
 Route::delete('brands/{id}','BrandsController@destroy');
 Route::put('brands/{brand}','BrandsController@update');
 Route::put('brands/disable/{id}','BrandsController@disable');
+Route::put('brands/enable/{id}','BrandsController@enable');
 Route::get('brands/status/{status}','BrandsController@getAllActive');
 
 //Route::resource('categories','CategoriesController');
@@ -46,6 +47,7 @@ Route::post('categories/post','CategoriesController@store');
 Route::put('categories/{category}','CategoriesController@update');
 Route::delete('categories/{id}','CategoriesController@destroy');
 Route::put('categories/disable/{id}','CategoriesController@disable');
+Route::put('categories/enable/{id}','CategoriesController@enable');
 Route::get('categories/status/{status}','CategoriesController@getAllActive');
 Route::get('categories/status/{status}/brand/{brand}','CategoriesController@getCateByBrand');
 

@@ -136,5 +136,20 @@ class CategoriesController extends Controller
 
     }
 
+    public  function enable(Request $request, $id) {
+
+        try{
+            $category= Category::findOrFail($id);
+            $category->status = 1;
+            $category->updated_at = $request['$updated_at'];
+            $category->save();
+            return response($category);
+        }
+        catch(ModelNotFoundException $err){
+            //Show error page
+        }
+
+    }
+
 
 }

@@ -108,4 +108,17 @@ class BrandsController extends Controller
         }
     }
 
+    public  function enable(Request $request, $id) {
+        try{
+            $brand= Brand::findOrFail($id);
+            $brand->status = 1;
+            $brand->updated_at = $request['$updated_at'];
+            $brand->save();
+            return response($brand);
+        }
+        catch(ModelNotFoundException $err){
+            //Show error page
+        }
+    }
+
 }

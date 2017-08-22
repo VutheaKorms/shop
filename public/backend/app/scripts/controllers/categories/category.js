@@ -156,6 +156,16 @@ angular.module('app')
             });
         }
 
+        $scope.saveEnable = function() {
+            $scope.loading = true;
+            dataFactory.httpRequest('api/categories/enable/'+$scope.form.id,'PUT',{},$scope.form).then(function(data) {
+                $(".modal").modal("hide");
+                $scope.data = apiModifyTable($scope.data,data.id,data);
+                Notification.success('Successfully saved');
+                $scope.loading = false;
+                getResultsPage(1);
+            });
+        }
 
         $scope.show = function(id){
             dataFactory.httpRequest('api/categories/'+id).then(function(data) {

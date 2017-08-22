@@ -65,22 +65,26 @@ angular
           BUTTON_SAVE: 'Save',
           Remove_Brand: 'Remove Brand',
           Remove_Category: 'Remove Category',
-          Message_brand: 'Are you want to disable this brand?',
-          Remove_Message: 'Are you want to delete this brand?',
+          Message_brand: 'Do you want to disable this brand?',
+          Remove_Message: 'Do you want to delete this brand?',
+          Enable_Message_Brand: 'Do you want to enable this brand?',
+          Enable_Brand : 'Enable Brand',
           No_Brand: 'No Brand Found',
           Brand_Name : 'Brand Name',
           No_Category: 'No Category Found',
           Select: 'Select',
-          Category_Disable_Message: 'Are you want to disable this category?',
-          Category_Remove_Message: 'Are you want to delete this category?',
+          Category_Disable_Message: 'Do you want to disable this category?',
+          Category_Remove_Message: 'Do you want to delete this category?',
+          Enable_Category : 'Enable Category',
+          Enable_Category_Message : 'Do you want to enable this category?',
           Item_Code: 'Code',
           Item_Price: 'Price',
           Category_Name : 'Category',
           No_Item_Found : 'No Item Found',
           Disable_Item : 'Disable Item',
           Remove_Item : 'Remove Item',
-          Item_Remove_Message : 'Are you want to remove this item?',
-          Disable_Item_Message : 'Are you want to disable this item?',
+          Item_Remove_Message : 'Do you want to remove this item?',
+          Disable_Item_Message : 'Do you want to disable this item?',
           Setup_Contact : 'Setup Contact',
           Phone: 'Phone Number',
           Email: 'Email',
@@ -95,8 +99,8 @@ angular
           Remove_Contact : 'Remove Contact',
           Edit_Contact : 'Edit Contact',
           Disable_Contact : 'Disable Contact',
-          Remove_Message_Contact : 'Are you want to delete this contact?',
-          Disable_Message_Contact : 'Are you want to disable this contact?',
+          Remove_Message_Contact : 'Do you want to delete this contact?',
+          Disable_Message_Contact : 'Do you want to disable this contact?',
           User_Profile : 'Profile',
           Edit : 'Edit',
           Edit_Profile : 'Edit Profile',
@@ -105,8 +109,8 @@ angular
           Hide_Password : 'Hide Password',
           Disable_Profile : 'Disable Profile',
           Enable_Profile : 'Enable Profile',
-          Disable_Message : 'Are you want to disable this user profile?',
-          Enable_Message : 'Are you want to enable this user profile?',
+          Disable_Message : 'Do you want to disable this user profile?',
+          Enable_Message : 'Do you want to enable this user profile?',
           Slider : 'Slide',
           Photo : 'Photo Slide',
           Image_Size : 'Size',
@@ -123,7 +127,7 @@ angular
           No_Photo_Slide : 'No Photo Slide',
           Remove_Button : 'Remove',
           Delete_Slide : 'Delete Slide',
-          Slide_Message : 'Are you want to remove this slide?',
+          Slide_Message : 'Do you want to remove this slide?',
           Language_Title : 'Language',
           Item_Management : 'Item Management',
           Brand_Type : 'Brand Type',
@@ -134,18 +138,23 @@ angular
           No_Photo_Found : 'No Photo Found',
           Photo_Item : 'Photo',
           Remove_Photo : 'Remove Photo',
-          Remove_Photo_Message : 'Are you want to remove this photo?',
+          Remove_Photo_Message : 'Do you want to remove this photo?',
           BUTTON_NEXT : 'Next',
           User_Client : 'Manage User',
           No_User_Found : 'No User Found',
           User_Detail : 'View User',
           Remove_User_Message : 'Are you want to remove this user account?',
           Remove_User : 'Remove User Account',
-          Disable_User_Message : 'Are you want to disable this user account?',
+          Disable_User_Message : 'Do you want to disable this user account?',
           Disable_User : 'Disable User Account',
-          Enable_User_Message : 'Are you want to enable this user account?',
+          Enable_User_Message : 'Do you want to enable this user account?',
           Enable_User : 'Enable User Account',
           Edit_User : 'Edit User Account',
+          Customer: 'Customers',
+          Stock : 'Stock Management',
+          Order : 'Order Management',
+          under_construction : 'under construction',
+          advertise_management : 'Advertise Management',
       });
       $translateProvider.translations('de', {
           Dashboard: 'ផ្ទាំងគ្រប់គ្រង',
@@ -264,6 +273,15 @@ angular
           Enable_User : 'បើកគណីប្រើប្រាស់',
           Disable_User : 'បិទគណីប្រើប្រាស់',
           Edit_User : 'កែប្រែគណីប្រើប្រាស់',
+          Customer: 'អតិថិជន',
+          Stock : 'គ្រប់គ្រងចំនួនផលិតផល',
+          Order : 'គ្រប់គ្រងការទិញលក់',
+          under_construction : 'កំពុង​សាងសង់',
+          Enable_Message_Brand: 'តើអ្នកពិតជាចង់បើកម៉ាកនេះវិញមែនទេ?',
+          Enable_Brand : 'បើកម៉ាកទ្បើងវិញ',
+          Enable_Category : 'បើកប្រភេទផលិតផល',
+          Enable_Category_Message : 'តើអ្នកចង់បើកដំណើរការប្រភេទផលិតផលនេះទេ?',
+          advertise_management : 'គ្រប់គ្រងការផ្សព្វផ្សាយ',
       });
       $translateProvider.preferredLanguage('en');
 
@@ -348,6 +366,21 @@ angular
         }
       })
 
+    .state('dashboard.advertise',{
+        url:'/advertise-management',
+        controller: 'AdvertiseCtrl',
+        templateUrl:'backend/app/views/profiles/advertise.html',
+        resolve: {
+            loadMyFiles:function($ocLazyLoad) {
+                return $ocLazyLoad.load({
+                    name:'app',
+                    files:[
+                        'backend/app/scripts/controllers/profiles/advertise.js'
+                    ]
+                })
+            }
+        }
+    })
 
     .state('dashboard.productCategory',{
         url:'/category',
@@ -423,6 +456,54 @@ angular
                     name:'app',
                     files:[
                         'backend/app/scripts/controllers/brands/brand-detail.js'
+                    ]
+                })
+            }
+        }
+    })
+
+    .state('dashboard.customer',{
+        url:'/customer',
+        controller: 'CustomerCtrl',
+        templateUrl:'backend/app/views/customers/customer.html',
+        resolve: {
+            loadMyFiles:function($ocLazyLoad) {
+                return $ocLazyLoad.load({
+                    name:'app',
+                    files:[
+                        'backend/app/scripts/controllers/customers/customer.js'
+                    ]
+                })
+            }
+        }
+    })
+
+    .state('dashboard.stock',{
+        url:'/stock-management',
+        controller: 'StockCtrl',
+        templateUrl:'backend/app/views/stocks/stock.html',
+        resolve: {
+            loadMyFiles:function($ocLazyLoad) {
+                return $ocLazyLoad.load({
+                    name:'app',
+                    files:[
+                        'backend/app/scripts/controllers/stocks/stock.js'
+                    ]
+                })
+            }
+        }
+    })
+
+    .state('dashboard.order',{
+        url:'/order-management',
+        controller: 'OrderCtrl',
+        templateUrl:'backend/app/views/stocks/order.html',
+        resolve: {
+            loadMyFiles:function($ocLazyLoad) {
+                return $ocLazyLoad.load({
+                    name:'app',
+                    files:[
+                        'backend/app/scripts/controllers/stocks/order.js'
                     ]
                 })
             }
