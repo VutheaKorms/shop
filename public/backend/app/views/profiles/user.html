@@ -92,7 +92,8 @@
                                         <ul class="dropdown-menu pull-right">
                                             <li style="cursor: pointer; cursor: hand;"><a data-toggle="modal" ng-click="edit(value.id)" data-target="#show-data"><i class="fa fa-eye"></i> <span translate="View"></span></a></li>
                                             <li style="cursor: pointer; cursor: hand;" ng-if="value.status != 0 && userAuth.email == email"><a data-toggle="modal" ng-click="edit(value.id)" data-target="#edit-data"><i class="fa fa-pencil"></i> <span translate="Update"></span></a></li>
-                                            <li style="cursor: pointer; cursor: hand;" ng-if="userAuth.email == email"><a data-toggle="modal" ng-click="edit(value.id)" data-target="#remove-data"><i class="fa fa-trash-o"></i> <span translate="Delete"></span></a></li>
+                                            <!--<li style="cursor: pointer; cursor: hand;" ng-if="value.status != 0 && userAuth.email == email"><a ui-sref="dashboard.edit-user({id: value.id})"><i class="fa fa-pencil"></i> <span translate="Update"></span></a></li>-->
+                                            <!--<li style="cursor: pointer; cursor: hand;" ng-if="userAuth.email == email"><a data-toggle="modal" ng-click="edit(value.id)" data-target="#remove-data"><i class="fa fa-trash-o"></i> <span translate="Delete"></span></a></li>-->
                                             <li style="cursor: pointer; cursor: hand;" ng-if="value.status != 0 && userAuth.email == email"><a data-toggle="modal" ng-click="edit(value.id)" data-target="#disable-data"><i class="fa fa-ban"></i> <span translate="Disable"></span></a></li>
                                             <li style="cursor: pointer; cursor: hand;" ng-if="value.status == 0 && userAuth.email == email"><a data-toggle="modal" ng-click="edit(value.id)" data-target="#enable-data"><i class="fa fa-ban"></i> <span translate="Enable"></span></a></li>
                                         </ul>
@@ -159,7 +160,8 @@
     <div class="modal fade" id="edit-data" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form method="POST" name="editItem" role="form" ng-submit="saveEdit()">
+                <form method="POST"  enctype="multipart/form-data" name="editItem" role="form" ng-submit="saveEdit()">
+                    <input ng-model="form.id" type="text" placeholder="Name" name="name" class="form-control" />
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                         <h4 class="modal-title" translate="Edit_User"></h4>
@@ -183,6 +185,9 @@
                                         <input type="checkbox"  ng-model="passwordCheckbox" ng-click="hideShowPassword()" />
                                         <label for="checkbox" ng-if="passwordCheckbox" translate="Hide_Password"></label>
                                         <label for="checkbox" ng-if="!passwordCheckbox" translate="Show_Password"></label><br /><br />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="file" name="image"><br><br>
                                     </div>
                                 </div>
                                 </div>
@@ -261,6 +266,10 @@
                                     <span ng-if="form.status == 1"><span class="label label-info" translate="Active"></span></span>
                                     <span ng-if="form.status == 0"><span class="label label-default" translate="Disable"></span></span>
                                   </span></span><br /><br />
+                        <span><b>Picture</b></span>
+                        <span>
+                            <img src="/{{form.picture.name}}" height="142" width="142">
+                        </span>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal"><span translate="BUTTON_CLOSE"></span></button>

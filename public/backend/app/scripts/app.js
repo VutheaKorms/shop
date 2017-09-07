@@ -155,6 +155,7 @@ angular
           Order : 'Order Management',
           under_construction : 'under construction',
           advertise_management : 'Advertise Management',
+          upload_profile : 'Upload Profile Picture',
       });
       $translateProvider.translations('de', {
           Dashboard: 'ផ្ទាំងគ្រប់គ្រង',
@@ -282,6 +283,7 @@ angular
           Enable_Category : 'បើកប្រភេទផលិតផល',
           Enable_Category_Message : 'តើអ្នកចង់បើកដំណើរការប្រភេទផលិតផលនេះទេ?',
           advertise_management : 'គ្រប់គ្រងការផ្សព្វផ្សាយ',
+          upload_profile : 'ដាក់រូបអ្នកប្រើប្រាស់',
       });
       $translateProvider.preferredLanguage('en');
 
@@ -617,6 +619,38 @@ angular
                     name:'app',
                     files:[
                         'backend/app/scripts/controllers/profiles/profile.js'
+                    ]
+                })
+            }
+        }
+    })
+
+    .state('dashboard.picture-upload',{
+        url:'/picture/upload/:id',
+        controller: 'PictureUploadCtrl',
+        templateUrl:'backend/app/views/profiles/picture-photo.html',
+        resolve: {
+            loadMyFiles:function($ocLazyLoad) {
+                return $ocLazyLoad.load({
+                    name:'app',
+                    files:[
+                        'backend/app/scripts/controllers/profiles/picture-photo.js'
+                    ]
+                })
+            }
+        }
+    })
+
+    .state('dashboard.edit-user',{
+        url:'/profile/edit/:id',
+        controller: 'ProfileEditCtrl',
+        templateUrl:'backend/app/views/profiles/edit-profile.html',
+        resolve: {
+            loadMyFiles:function($ocLazyLoad) {
+                return $ocLazyLoad.load({
+                    name:'app',
+                    files:[
+                        'backend/app/scripts/controllers/profiles/edit-profile.js'
                     ]
                 })
             }

@@ -135,6 +135,7 @@
                     <li class="dropdown" style="cursor: pointer; cursor: hand;">
                         <a class="dropdown-toggle" data-toggle="dropdown">
                             {{ Auth::user()->name }} <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                            <img src="/{{ Auth::user()->picture->name }}" height="30" width="30">
                         </a>
                         <ul class="dropdown-menu dropdown-user">
                             <li><a class="nav-link" ui-sref="dashboard.profile"><i class="fa fa-user fa-fw"></i> User Profiles</a>

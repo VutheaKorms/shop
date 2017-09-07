@@ -24,7 +24,6 @@ class AddressesController extends Controller
     public function getAllCountryActive($status) {
         $brands = Country::where('status', $status)
             ->orderBy('name', 'desc')
-            ->take(10)
             ->get();
         return response($brands);
     }
@@ -33,7 +32,6 @@ class AddressesController extends Controller
         $state = State::with('country')->where('status', $status)
             ->where('country_id', $country_id)
             ->orderBy('name', 'desc')
-            ->take(10)
             ->get();
         return response($state);
     }
@@ -41,7 +39,6 @@ class AddressesController extends Controller
     public function getAllStateActive($status) {
         $brands = State::where('status', $status)
             ->orderBy('name', 'desc')
-            ->take(10)
             ->get();
         return response($brands);
     }
@@ -49,7 +46,6 @@ class AddressesController extends Controller
     public function getAllLocationActive($status) {
         $brands = Location::where('status', $status)
             ->orderBy('name', 'desc')
-            ->take(10)
             ->get();
         return response($brands);
     }

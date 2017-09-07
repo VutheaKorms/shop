@@ -1,0 +1,54 @@
+<div ng-controller="PictureUploadCtrl">
+    <div class="row">
+        <div class="col-lg-11">
+            <h1 class="page-header"><span translate="upload_profile"></span></h1>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <form  enctype="multipart/form-data" method="POST">
+            <!--{{ csrf_field() }}-->
+
+            <div class="col-md-3">
+                <input type="file" nv-file-select="" uploader="uploader" ng-disabled="picture.picture.name != null"/><br/>
+                <tr>
+                    <td><img src="/{{picture.picture.name}}" height="142" width="142"></td>
+                </tr>
+                <br /><br />
+                <div>
+                    <!--<div>-->
+                    <!--<span translate="Progress"></span>-->
+                    <!--<div class="progress" style="">-->
+                    <!--<div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
+                        <span class="glyphicon glyphicon-upload"></span> <span translate="Upload"></span>
+                    </button>
+                    <button type="button" class="btn btn-danger btn-s" ng-click="deletePic(); uploader.clearQueue()" ng-disabled="picture.picture.name == null">
+                        <span class="glyphicon glyphicon-trash"></span> <span translate="Remove_Button"></span>
+                    </button>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <div class="row">
+        <div class="col-lg-11">
+            <h1 class="page-header"><button type="button" class="btn btn-default" ng-click="goBack();"><span translate="BUTTON_BACK"></span></button></h1>
+        </div>
+        <div class="col-lg-1">
+            <h1 class="page-header">
+                <button type="button" class="btn btn-primary" ng-disabled="picture.picture.name == null"  ng-click="next();"><span translate="BUTTON_NEXT"></span></button>
+            </h1>
+        </div>
+
+    </div>
+
+
+
+</div>

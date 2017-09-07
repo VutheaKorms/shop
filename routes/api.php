@@ -17,15 +17,29 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+//Route::group(['middleware' => ['web']],function() {
+//    Route::put('user/{id}','UsersController@update');
+//    Route::get('user/{id}/edit','UsersController@edit');
+//});
+
+
+
 Route::group(['middleware' => ['auth']], function () {
-    Route::resource('users','UsersController');
-//    Route::get('users/user/{id}','UsersController@show_user');
-    Route::put('users/update/{id}','UsersController@updateUser');
+//    Route::resource('users','UsersController');
+    Route::get('users','UsersController@index');
     Route::put('user/disable/{id}','UsersController@disable');
     Route::put('user/enable/{id}','UsersController@enable');
-    Route::get('/test', function() {
-        return Auth::user();
-    });
+//    Route::get('picture/{id}','UsersController@showPicture');
+    Route::delete('picture/delete/{id}','UsersController@deletePic');
+    Route::get('/test','UsersController@userLogIn');
+    Route::put('user/{id}','UsersController@update');
+    Route::get('user/{id}/edit','UsersController@edit');
+    Route::post('users/testUpload','UsersController@resizeImagePost');
+
+//    Route::get('/test', function() {
+//        return Auth::user();
+//    });
+
 });
 
 //Route::resource('brands','BrandsController');

@@ -9,43 +9,7 @@
         </div>
         <!-- /.col-lg-12 -->
     </div>
-    <!--<div class="row">-->
-        <!--<div class="col-lg-6">-->
-            <!--&lt;!&ndash;&lt;!&ndash;<button type="button" class="btn btn-primary" ng-click="create();">Add New Product Type</button>&ndash;&gt;&ndash;&gt;-->
-            <!--&lt;!&ndash;<button class="btn btn-success" data-toggle="modal" data-target="#create-brand">Create New</button>&ndash;&gt;-->
-        <!--</div>-->
-        <!--<div class="col-lg-6">-->
-            <!--<div class="col-lg-3">-->
-                <!--&lt;!&ndash;<div class="col-lg-2 pull-right">&ndash;&gt;-->
-                <!--&lt;!&ndash;<div class="btn-group">&ndash;&gt;-->
-                <!--&lt;!&ndash;<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&ndash;&gt;-->
-                <!--&lt;!&ndash;Filter by <span class="caret"></span>&ndash;&gt;-->
-                <!--&lt;!&ndash;</button>&ndash;&gt;-->
-                <!--&lt;!&ndash;<ul class="dropdown-menu">&ndash;&gt;-->
-                <!--&lt;!&ndash;<li><a ui-sref=""><i class="fa fa-eye"></i> All</a></li>&ndash;&gt;-->
-                <!--&lt;!&ndash;<li><a href="#"><i class="fa-check-square-o"></i> Active</a></li>&ndash;&gt;-->
-                <!--&lt;!&ndash;<li><a href="#"><i class="fa fa-ban"></i> Disable</a></li>&ndash;&gt;-->
-                <!--&lt;!&ndash;</ul>&ndash;&gt;-->
-                <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                <!--&lt;!&ndash;</div>&ndash;&gt;-->
-            <!--</div>-->
-            <!--<div class="col-lg-9">-->
-                <!--<div class="box-tools pull-right" style="display:inline-table">-->
-                    <!--<div class="input-group form-group pull-right">-->
-                        <!--<input type="text" class="form-control  ng-valid ng-dirty"-->
-                               <!--placeholder="Search" ng-change="searchDB()"-->
-                               <!--ng-model="searchText" name="table_search" title=""-->
-                               <!--tooltip="" data-original-title="Min character length is 3">-->
-                        <!--<span class="input-group-addon">Search</span>-->
-                    <!--</div>-->
-                <!--</div>-->
-                <!--&lt;!&ndash;<div class="form-group">&ndash;&gt;-->
-                <!--&lt;!&ndash;<input class="form-control" placeholder="Search....">&ndash;&gt;-->
-                <!--&lt;!&ndash;</div>&ndash;&gt;-->
-            <!--</div>-->
 
-        <!--</div>-->
-    <!--</div>-->
     <div class="row">
         <div class="col-lg-12">
 
@@ -59,12 +23,18 @@
                                     <span ng-if="data.status == 1"><span class="label label-info" translate="Active"></span></span>
                                     <span ng-if="data.status == 0"><span class="label label-default" translate="Disable"></span></span>
                             </span>
-                            <hr />
-                            <br />
-                            <button class="btn btn-primary" ng-if="data.status == 1" data-toggle="modal" ng-click="edit(data.id)" data-target="#edit-data"><i class="fa fa-pencil"></i> <span translate="Edit"></span></button>&nbsp;
-                            <button class="btn btn-warning" ng-if="data.status == 1" data-toggle="modal" ng-click="edit(data.id)" data-target="#disable-data"><i class="fa fa-ban"></i> <span translate="Disable"></span></button>
-                            <button class="btn btn-primary" ng-if="data.status == 0" data-toggle="modal" ng-click="edit(data.id)" data-target="#enable-data"><i class="fa fa-user"></i> <span translate="Enable"></span></button>
+                            <br /><br />
                         </table>
+                    </div>
+                    <div class="dataTable_wrapper">
+                        <img src="/{{data.picture.name}}" height="142" width="142">
+                        <hr />
+                        <br />
+
+                        <button class="btn btn-primary" ng-if="data.status == 1" ui-sref="dashboard.edit-user({id: data.id})"><i class="fa fa-pencil"></i> <span translate="Edit"></span></button>&nbsp;
+                        <!--<button class="btn btn-primary" ng-if="data.status == 1" data-toggle="modal" ng-click="edit(data.id)" data-target="#edit-data"><i class="fa fa-pencil"></i> <span translate="Edit"></span></button>&nbsp;-->
+                        <button class="btn btn-warning" ng-if="data.status == 1" data-toggle="modal" ng-click="edit(data.id)" data-target="#disable-data"><i class="fa fa-ban"></i> <span translate="Disable"></span></button>
+                        <button class="btn btn-primary" ng-if="data.status == 0" data-toggle="modal" ng-click="edit(data.id)" data-target="#enable-data"><i class="fa fa-user"></i> <span translate="Enable"></span></button>
                     </div>
                     <!-- /.table-responsive -->
 
@@ -74,50 +44,50 @@
         <!-- /.col-lg-12 -->
     </div>
 
-    <div class="modal fade" id="edit-data" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <form method="POST" name="editItem" role="form" ng-submit="saveEdit()">
-                    <input ng-model="form.id" type="hidden" placeholder="Name" name="name" class="form-control" />
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                        <h4 class="modal-title" id="myModalLabel" translate="Edit_Profile"></h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-6 col-md-6">
-                                    <strong translate="Name"> : </strong>
-                                    <div class="form-group">
-                                        <input ng-model="form.name" type="text" placeholder="Name" name="title" class="form-control" required />
-                                    </div>
-                                    <strong translate="Email"> : </strong>
-                                    <div class="form-group">
-                                        <input ng-model="form.email" type="email" placeholder="Email" name="title" class="form-control" required />
-                                    </div>
-                                    <strong translate="Password"> : </strong>
-                                    <div class="form-group">
-                                        <input type="{{inputType}}" ng-model="form.password" type="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                                               title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" class="form-control" required>
-                                        <input type="checkbox" id="checkbox" ng-model="passwordCheckbox" ng-click="hideShowPassword()" />
-                                        <label for="checkbox" ng-if="passwordCheckbox" translate="Hide_Password"></label>
-                                        <label for="checkbox" ng-if="!passwordCheckbox" translate="Show_Password"></label><br /><br />
-                                    </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-sm-6 col-md-6">
+    <!--<div class="modal fade" id="edit-data" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">-->
+        <!--<div class="modal-dialog" role="document">-->
+            <!--<div class="modal-content">-->
+                <!--<form method="POST" name="editItem" role="form" ng-submit="saveEdit()">-->
+                    <!--<input ng-model="form.id" type="hidden" placeholder="Name" name="name" class="form-control" />-->
+                    <!--<div class="modal-header">-->
+                        <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>-->
+                        <!--<h4 class="modal-title" id="myModalLabel" translate="Edit_Profile"></h4>-->
+                    <!--</div>-->
+                    <!--<div class="modal-body">-->
+                        <!--<div class="container">-->
+                            <!--<div class="row">-->
+                                <!--<div class="col-xs-12 col-sm-6 col-md-6">-->
+                                    <!--<strong translate="Name"> : </strong>-->
+                                    <!--<div class="form-group">-->
+                                        <!--<input ng-model="form.name" type="text" placeholder="Name" name="title" class="form-control" required />-->
+                                    <!--</div>-->
+                                    <!--<strong translate="Email"> : </strong>-->
+                                    <!--<div class="form-group">-->
+                                        <!--<input ng-model="form.email" type="email" placeholder="Email" name="title" class="form-control" required />-->
+                                    <!--</div>-->
+                                    <!--<strong translate="Password"> : </strong>-->
+                                    <!--<div class="form-group">-->
+                                        <!--<input type="{{inputType}}" ng-model="form.password" type="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"-->
+                                               <!--title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" class="form-control" required>-->
+                                        <!--<input type="checkbox" id="checkbox" ng-model="passwordCheckbox" ng-click="hideShowPassword()" />-->
+                                        <!--<label for="checkbox" ng-if="passwordCheckbox" translate="Hide_Password"></label>-->
+                                        <!--<label for="checkbox" ng-if="!passwordCheckbox" translate="Show_Password"></label><br /><br />-->
+                                    <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="col-xs-12 col-sm-6 col-md-6">-->
 
-                                </div>
-                            </div>
-                            <br />
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><span translate="BUTTON_CLOSE"></span></button>
-                            <button type="submit" ng-disabled="editItem.$invalid" class="btn btn-primary create-crud"><span translate="BUTTON_SAVE"></span></button>
-                        </div>
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<br />-->
+                            <!--<button type="button" class="btn btn-default" data-dismiss="modal"><span translate="BUTTON_CLOSE"></span></button>-->
+                            <!--<button type="submit" ng-disabled="editItem.$invalid" class="btn btn-primary create-crud"><span translate="BUTTON_SAVE"></span></button>-->
+                        <!--</div>-->
 
-                </form>
-            </div>
-        </div>
-    </div>
+                <!--</form>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
 
     <div class="modal fade" id="disable-data" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">

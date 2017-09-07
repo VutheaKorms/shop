@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'status',
+        'name', 'email', 'password', 'status','avatar','size','type',
     ];
 
     /**
@@ -30,4 +30,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password','remember_token',
     ];
+
+    public function picture()
+    {
+        return $this->hasOne('App\Models\Picture');
+    }
 }

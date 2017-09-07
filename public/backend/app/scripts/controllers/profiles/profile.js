@@ -68,11 +68,10 @@ angular.module('app')
         getResultsPage();
 
         function getResultsPage() {
-                dataFactory.httpRequest('api/test').then(function(data) {
-                    $scope.data = data;
-                });
+            dataFactory.httpRequest('api/test').then(function(data) {
+                $scope.data = data;
+            });
         }
-
 
         $scope.form = {
             name: $scope.name,
@@ -102,7 +101,6 @@ angular.module('app')
             dataFactory.httpRequest('api/users/'+$scope.form.id,'PUT',{},$scope.form).then(function(data) {
                 $(".modal").modal("hide");
                 $scope.data = apiModifyTable($scope.data,data.id,data);
-                console.log($scope.data);
                 Notification.success('Successfully saved');
                 $scope.loading = false;
                 getResultsPage();

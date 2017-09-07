@@ -84,6 +84,7 @@ angular.module('app')
             }else{
                     dataFactory.httpRequest('api/users' + '?page=' +pageNumber).then(function(data) {
                         $scope.data = data.data;
+                        console.log($scope.data);
                         $scope.totalItems = data.total;
                     });
 
@@ -112,6 +113,9 @@ angular.module('app')
             name: $scope.name,
             email_address: $scope.email_address,
             password : $scope.password,
+            avatar : $scope.avatar,
+            size : $scope.size,
+            type : $scope.type,
         }
 
         $scope.saveAdd = function(){
@@ -126,9 +130,10 @@ angular.module('app')
             });
         }
 
+
         $scope.saveEdit = function(){
             $scope.loading = true;
-            dataFactory.httpRequest('api/users/'+$scope.form.id,'PUT',{},$scope.form).then(function(data) {
+            dataFactory.httpRequest('api/user/pic/'+$scope.form.id,'PUT',{},$scope.form).then(function(data) {
                 $(".modal").modal("hide");
                 $scope.data = apiModifyTable($scope.data,data.id,data);
                 Notification.success('Successfully saved');
@@ -137,9 +142,26 @@ angular.module('app')
             });
         }
 
+
+        //function goToUpload() {
+        //    $state.go('dashboard.picture-upload');
+        //}
+
+        //$scope.saveEdit = function(){
+        //    $scope.loading = true;
+        //    dataFactory.httpRequest('api/users/'+$scope.form.id,'PUT',{},$scope.form).then(function(data) {
+        //        $(".modal").modal("hide");
+        //        $scope.data = apiModifyTable($scope.data,data.id,data);
+        //        Notification.success('Successfully saved');
+        //        $scope.loading = false;
+        //        getResultsPage();
+        //    });
+        //}
+
         $scope.edit = function(id){
             dataFactory.httpRequest('api/users/'+id+'/edit').then(function(data) {
                 $scope.form = data;
+                console.log($scope.form);
             });
         }
 
